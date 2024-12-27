@@ -1,0 +1,48 @@
+/* Applique Flexbox pour espacer les éléments */
+mat-toolbar {
+    display: flex;
+    justify-content: space-between; /* Espace entre les éléments */
+    align-items: center; /* Aligner verticalement au centre */
+    position: fixed; /* Rendre la barre de navigation fixe */
+    top: 0; /* Positionner en haut de la page */
+    left: 0; /* Positionner à gauche */
+    right: 0; /* Positionner à droite */
+    z-index: 1000; /* Assurez-vous qu'il soit au-dessus des autres éléments */
+    background-color: #1976d2; /* Exemple de couleur pour la barre */
+    padding: 0 16px; /* Padding pour gérer l'espacement intérieur */
+    border-radius: 10px;
+  }
+  
+  /* Utilisé pour remplir l'espace restant entre les éléments */
+  .spacer {
+    flex: 1;
+  }
+  
+  /* Style spécifique pour le titre */
+  .app-title {
+    font-weight: bold; /* Titre en gras */
+    font-size: 18px; /* Taille du texte du titre */
+    margin-left: 16px; /* Marge à gauche */
+  }
+  
+  /* Style des boutons */
+  mat-toolbar button {
+    color: white; /* Couleur du texte des boutons */
+    margin-right: 8px; /* Espacement entre les boutons */
+  }
+  
+  /* Effet de survol des boutons */
+  mat-toolbar button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Effet au survol */
+    border-radius: 4px;
+  }
+  
+  /* Ajoutez un espacement supérieur pour que le contenu ne soit pas caché sous la toolbar */
+  body {
+    padding-top: 64px; /* Hauteur de la toolbar pour que le contenu commence en dessous */
+  }
+  router-outlet {
+    margin-top: 64px; /* Ajustez la valeur selon la hauteur de votre mat-toolbar */
+  }
+  
+  
