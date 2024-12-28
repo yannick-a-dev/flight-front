@@ -1,8 +1,19 @@
 <mat-toolbar class="blue-toolbar">
   <span>My Application</span>
   <span class="spacer"></span>
-  <button mat-button routerLink="/login">Login</button>
-  <button mat-button routerLink="/register">Register</button>
+
+  <!-- Affichage du bouton Dashboard en permanence -->
+  <button mat-button routerLink="/dashboard">Dashboard</button>
+
+  <!-- Affichage du bouton Login uniquement si l'utilisateur est sur la page login -->
+  <button *ngIf="currentRoute !== '/login' && currentRoute !== '/dashboard'" mat-button routerLink="/login">Login</button>
+
+  <!-- Affichage du bouton Register uniquement si l'utilisateur est sur la page register -->
+  <button *ngIf="currentRoute !== '/register' && currentRoute !== '/dashboard'" mat-button routerLink="/register">Register</button>
 </mat-toolbar>
+
+<!-- Affichage du contenu via le router-outlet -->
 <router-outlet></router-outlet>
+
+
 

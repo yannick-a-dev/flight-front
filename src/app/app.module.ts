@@ -19,8 +19,14 @@ import { MatCardModule } from '@angular/material/card';
 import { HomeComponent } from './components/home/home.component'; 
 import { MatDialogModule } from '@angular/material/dialog';
 import { UpdatePassengerComponent } from './components/update-passenger/update-passenger.component';
-import { MatTableModule } from '@angular/material/table';  // Import du module MatTable
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { AlertsComponent } from './components/alert/alert.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { CreateAlertComponent } from './components/create-alert/create-alert.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -28,7 +34,10 @@ import { MatTableModule } from '@angular/material/table';  // Import du module M
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    UpdatePassengerComponent
+    UpdatePassengerComponent,
+    AlertsComponent,
+    DashboardComponent,
+    CreateAlertComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +54,11 @@ import { MatTableModule } from '@angular/material/table';  // Import du module M
     MatDatepickerModule,
     MatCardModule,
     MatDialogModule,
-    MatTableModule
+    MatTableModule,
+    MatListModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    MatSelectModule
   ],
   providers: [
     provideAnimationsAsync()

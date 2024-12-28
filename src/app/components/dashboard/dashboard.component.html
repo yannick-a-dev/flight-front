@@ -1,0 +1,21 @@
+<div class="dashboard-container">
+    <h1>Tableau de Bord Principal</h1>
+  
+    <div class="summary-section">
+      <h2>Résumé des Activités</h2>
+      <p>Bienvenue {{ user?.firstName }} ! Voici les dernières informations importantes.</p>
+    </div>
+  
+    <div class="alerts-section">
+      <h2>Alertes Critiques</h2>
+      <app-alert></app-alert>
+    </div>
+
+    <div class="create-alert-section">
+       <!-- Bouton pour rediriger vers la création d'alerte -->
+    <button mat-raised-button color="primary" (click)="redirectToCreateAlert()">
+      Créer une Alerte
+    </button>
+    </div>
+  </div>
+  
