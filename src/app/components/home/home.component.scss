@@ -1,32 +1,98 @@
 .table-card {
-    margin: 20px;
-  }
-  
-  mat-card-header {
-    background-color: #1976d2;
-    color: white;
-  }
-  
-  mat-card-title {
-    font-size: 20px;
-  }
-  
-  table {
-    width: 100%;
-    margin-top: 16px;
-  }
-  
-  mat-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th, td {
+  margin: 20px;
+  margin-top: 80px; /* Ajouter un espacement entre le header principal et le card */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-header {
+  background-color: #19bdd2; /* Bleu intense pour l'en-tête */
+  color: white;
+  padding: 16px;
+  border-radius: 8px 8px 0 0; /* Coins arrondis en haut */
+}
+
+mat-card-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+mat-card-content {
+  padding: 16px;
+  background-color: #fafafa; /* Couleur de fond claire pour le contenu */
+  border-radius: 0 0 8px 8px; /* Coins arrondis en bas */
+  margin-top: 16px; /* Ajoute un espacement entre le header et le contenu */
+}
+
+table {
+  width: 100%;
+  margin-top: 16px; /* Assure que la table a un espace supérieur */
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  overflow: hidden; /* Pour que les coins arrondis soient visibles */
+}
+
+mat-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f5f5f5; /* Fond clair pour les entêtes de colonnes */
+  color: #333;
+  font-weight: 600;
+}
+
+td {
+  background-color: white;
+  color: #555;
+}
+
+mat-button {
+  margin-right: 8px;
+  background-color: #1976d2;
+  color: white;
+  border-radius: 4px;
+  padding: 6px 12px;
+  text-transform: uppercase;
+  font-size: 14px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+mat-button:hover {
+  background-color: #1565c0;
+  transform: translateY(-2px); /* Effet de survol */
+}
+
+mat-button:focus {
+  outline: none;
+  background-color: #1565c0;
+  transform: translateY(-2px);
+}
+
+button[mat-button] {
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  mat-card {
     padding: 8px;
-    text-align: left;
   }
-  
-  mat-button {
-    margin-right: 8px;
+
+  mat-card-title {
+    font-size: 18px;
   }
-  
+
+  table {
+    font-size: 14px;
+  }
+}
+
+

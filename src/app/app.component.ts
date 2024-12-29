@@ -15,16 +15,14 @@ export class AppComponent {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    // Suivre les changements de route
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.currentRoute = event.urlAfterRedirects; // Met à jour currentRoute lors de chaque changement de route
+        this.currentRoute = event.urlAfterRedirects; 
       }
     });
   }
 
-  // Logique pour revenir en arrière
   goBack(): void {
-    window.history.back(); // Utilisation de l'historique du navigateur pour revenir en arrière
+    window.history.back(); 
   }
 }

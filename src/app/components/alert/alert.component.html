@@ -1,18 +1,23 @@
 <div class="alert-container">
-    <h2>Alertes Critiques</h2>
-    <button mat-raised-button (click)="toggleAlerts()">
-        {{ showAllAlerts ? 'Voir alertes du passager' : 'Voir toutes les alertes' }}
+    <h2>Alertes Importantes</h2>
+    <button mat-raised-button class="toggle-button" (click)="toggleAlerts()">
+      {{ showAllAlerts ? 'Afficher alertes du passager' : 'Afficher toutes les alertes' }}
     </button>
-    <mat-list *ngIf="alerts.length > 0; else noAlerts">
-        <mat-list-item *ngFor="let alert of alerts">
-            <mat-icon mat-list-icon>notification_important</mat-icon>
-            <h4 mat-line>{{ alert.message }}</h4>
-            <p mat-line>
-                Sévérité: {{ alert.severity }} | Date: {{ alert.alertDate | date: 'short' }}
-            </p>
-        </mat-list-item>
-    </mat-list>
+  
+    <div class="alert-grid">
+      <div class="alert-card" *ngFor="let alert of alerts" [ngClass]="alert.severity">
+        <mat-icon class="alert-icon">notification_important</mat-icon>
+        <div class="alert-details">
+          <h4>{{ alert.message }}</h4>
+          <p>Sévérité: <span class="severity">{{ alert.severity }}</span></p>
+          <p>Date: {{ alert.alertDate | date: 'short' }}</p>
+        </div>
+      </div>
+    </div>
+  
     <ng-template #noAlerts>
-        <p>Aucune alerte disponible.</p>
+      <p class="no-alerts">Aucune alerte disponible pour le moment.</p>
     </ng-template>
-</div>
+  </div>
+  
+  

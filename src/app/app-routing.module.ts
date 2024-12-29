@@ -5,11 +5,14 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CreateAlertComponent } from './components/create-alert/create-alert.component';
+import { AuthGuard } from './auth/auth.guard';
+import { UpdatePassengerComponent } from './components/update-passenger/update-passenger.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'update-passenger/:id', component: UpdatePassengerComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'create-alert', component: CreateAlertComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },

@@ -30,4 +30,11 @@ export class AuthService {
   checkPermissions(): Observable<any> {
     return this.http.get(`${this.baseUrl}/permissions`);
   }
+
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('accessToken');
+    console.log('Checking authentication status, token:', token);
+    return token ? true : false;  // Si le token est présent, l'utilisateur est authentifié
+  }
+  
 }

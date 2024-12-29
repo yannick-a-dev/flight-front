@@ -1,1 +1,66 @@
-<p>update-passenger works!</p>
+<form [formGroup]="updateForm" (ngSubmit)="onSubmit()" class="passenger-update-form">
+  <mat-card>
+    <mat-card-title>Update Passenger</mat-card-title>
+    <mat-card-content>
+      <div class="form-group">
+        <mat-form-field appearance="fill" class="horizontal-field">
+          <mat-label>First Name</mat-label>
+          <input matInput id="firstName" formControlName="firstName" />
+          <mat-error *ngIf="updateForm.get('firstName')?.hasError('required')">
+            First Name is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="horizontal-field">
+          <mat-label>Last Name</mat-label>
+          <input matInput id="lastName" formControlName="lastName" />
+          <mat-error *ngIf="updateForm.get('lastName')?.hasError('required')">
+            Last Name is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field appearance="fill" class="horizontal-field">
+          <mat-label>Email</mat-label>
+          <input matInput id="email" formControlName="email" />
+          <mat-error *ngIf="updateForm.get('email')?.hasError('required')">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="updateForm.get('email')?.hasError('email')">
+            Invalid email format
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="horizontal-field">
+          <mat-label>Phone</mat-label>
+          <input matInput id="phone" formControlName="phone" />
+          <mat-error *ngIf="updateForm.get('phone')?.hasError('required')">
+            Phone is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field appearance="fill" class="horizontal-field">
+          <mat-label>Passport Number</mat-label>
+          <input matInput id="passportNumber" formControlName="passportNumber" />
+          <mat-error *ngIf="updateForm.get('passportNumber')?.hasError('required')">
+            Passport Number is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="horizontal-field">
+          <mat-label>Date of Birth</mat-label>
+          <input matInput id="dob" formControlName="dob" type="date" />
+          <mat-error *ngIf="updateForm.get('dob')?.hasError('required')">
+            Date of Birth is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="updateForm.invalid">Update Passenger</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

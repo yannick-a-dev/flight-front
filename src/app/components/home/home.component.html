@@ -38,7 +38,7 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> Actions </th>
           <td mat-cell *matCellDef="let passenger">
-            <button mat-button (click)="openUpdateDialog(passenger.id)">Update</button>
+            <button mat-button  [routerLink]="['/update-passenger', passenger.id]">Update</button>
             <button mat-button (click)="deletePassenger(passenger.id)">Delete</button>
           </td>
         </ng-container>

@@ -1,17 +1,9 @@
 <mat-toolbar class="blue-toolbar">
   <span>My Application</span>
   <span class="spacer"></span>
-
-  <!-- Affichage du bouton Dashboard en permanence -->
   <button mat-button routerLink="/dashboard">Dashboard</button>
-
-  <!-- Affichage du bouton Login uniquement si l'utilisateur n'est pas sur la page login -->
   <button *ngIf="currentRoute !== '/login' && currentRoute !== '/dashboard'" mat-button routerLink="/login">Login</button>
-
-  <!-- Affichage du bouton Register uniquement si l'utilisateur n'est pas sur la page register -->
   <button *ngIf="currentRoute !== '/register' && currentRoute !== '/dashboard'" mat-button routerLink="/register">Register</button>
-
-  <!-- Affichage du bouton Retour uniquement si l'utilisateur est sur le tableau de bord -->
   <button *ngIf="currentRoute === '/dashboard'" mat-button (click)="goBack()">Retour</button>
 </mat-toolbar>
 

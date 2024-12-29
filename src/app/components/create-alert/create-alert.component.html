@@ -1,6 +1,7 @@
-<div class="create-alert-container">
+<div class="page-container">
+  <div class="create-alert-container">
     <h2>Créer une Nouvelle Alerte</h2>
-  
+
     <form [formGroup]="alertForm" (ngSubmit)="onSubmit()">
       <!-- Message -->
       <mat-form-field appearance="fill">
@@ -8,7 +9,7 @@
         <textarea matInput formControlName="message"></textarea>
         <mat-error *ngIf="message?.invalid">{{ getErrorMessage('message') }}</mat-error>
       </mat-form-field>
-  
+
       <!-- Sévérité -->
       <mat-form-field appearance="fill">
         <mat-label>Sévérité</mat-label>
@@ -20,7 +21,7 @@
         </mat-select>
         <mat-error *ngIf="severity?.invalid">Sévérité requise</mat-error>
       </mat-form-field>
-  
+
       <!-- Date de l'Alerte -->
       <mat-form-field appearance="fill">
         <mat-label>Date de l'Alerte</mat-label>
@@ -29,12 +30,13 @@
         <mat-datepicker #picker></mat-datepicker>
         <mat-error *ngIf="alertDate?.invalid">Date requise</mat-error>
       </mat-form-field>
-  
+
       <!-- Bouton de soumission -->
       <div class="form-actions">
-        <button mat-raised-button color="primary" type="submit" [disabled]="alertForm.invalid">Créer l'Alerte</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="alertForm.invalid">
+          Créer l'Alerte
+        </button>
       </div>
     </form>
   </div>
-  
-  
+</div>
