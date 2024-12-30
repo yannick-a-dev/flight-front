@@ -56,11 +56,16 @@
           <mat-error *ngIf="updateForm.get('dob')?.hasError('required')">
             Date of Birth is required
           </mat-error>
+          <mat-error *ngIf="updateForm.get('dob')?.hasError('invalidDate')">
+            Date format should be yyyy-MM-dd
+          </mat-error>
         </mat-form-field>
       </div>
     </mat-card-content>
+
     <mat-card-actions>
       <button mat-raised-button color="primary" type="submit" [disabled]="updateForm.invalid">Update Passenger</button>
     </mat-card-actions>
   </mat-card>
 </form>
+

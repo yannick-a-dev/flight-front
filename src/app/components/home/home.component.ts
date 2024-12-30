@@ -38,7 +38,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  // Ouvrir le dialogue pour la mise à jour d'un passager
   openUpdateDialog(id: number): void {
     const dialogRef = this.dialog.open(UpdatePassengerComponent, {
       width: '400px',
