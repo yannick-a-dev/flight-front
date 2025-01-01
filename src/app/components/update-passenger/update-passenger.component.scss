@@ -1,67 +1,49 @@
-/* Centrer le formulaire sur la page */
 .passenger-update-form {
-    max-width: 600px;
-    margin: 32px auto;
-    padding: 16px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background-color: #f9f9f9;
-  }
-  
-  /* Appliquer un espacement cohérent entre les champs */
-  mat-form-field {
-    width: 100%;
-    margin-bottom: 16px;
-  }
-  
-  /* Style des cartes */
-  mat-card {
-    padding: 16px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background-color: white;
-  }
-  
-  /* Style pour les titres des cartes */
-  mat-card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #3f51b5;
-    margin-bottom: 16px;
-    text-align: center;
-  }
-  
-  /* Style pour les boutons */
-  mat-card-actions {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  button[mat-raised-button] {
-    font-size: 1rem;
-    padding: 8px 16px;
-  }
-  
-  /* Couleur du bouton désactivé */
-  button[mat-raised-button][disabled] {
-    background-color: #e0e0e0;
-    color: #9e9e9e;
-  }
-  
-  /* Responsive design */
-  @media (max-width: 600px) {
-    .passenger-update-form {
-      margin: 16px;
-      padding: 8px;
-    }
-  
-    mat-card-title {
-      font-size: 1.2rem;
-    }
-  
-    button[mat-raised-button] {
-      width: 100%;
-      margin-top: 16px;
-    }
-  }
-  
+  max-width: 500px; /* Réduction de la largeur */
+  margin: 0 auto; /* Centrage horizontal */
+  position: fixed; /* Formulaire fixe */
+  top: 10%; /* Positionnement à 10% depuis le haut de l'écran */
+  left: 50%;
+  transform: translateX(-50%); /* Centrage horizontal via transform */
+  padding: 8px; /* Padding réduit */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #ffffff;
+  z-index: 1000; /* Au-dessus des autres éléments */
+}
+
+.passenger-update-form mat-card {
+  padding: 8px; /* Réduction du padding de la carte */
+}
+
+.passenger-update-form mat-card-title {
+  font-size: 1.2rem; /* Réduction de la taille de police */
+  margin-bottom: 4px; /* Espacement inférieur réduit */
+  text-align: center;
+  color: #3f51b5;
+}
+
+.passenger-update-form mat-card-content {
+  padding: 4px; /* Réduction du padding interne */
+}
+
+.passenger-update-form .form-group {
+  margin-bottom: 6px; /* Réduction de l'espace entre les groupes */
+}
+
+.passenger-update-form mat-form-field {
+  width: 100%;
+  margin-bottom: 6px; /* Réduction de l'espacement entre les champs */
+}
+
+.passenger-update-form mat-card-actions {
+  padding: 4px; /* Réduction du padding des actions */
+  display: flex;
+  justify-content: flex-end;
+}
+
+.passenger-update-form button[mat-raised-button] {
+  font-size: 0.85rem; /* Réduction de la taille des boutons */
+  padding: 4px 10px;
+}
+
