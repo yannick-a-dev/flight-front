@@ -1,0 +1,147 @@
+/* Conteneur principal des alertes */
+.alert-container {
+  margin: 20px auto;
+  width: 80%;
+  max-width: 1000px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Titre des alertes */
+.alert-title {
+  font-size: 2em;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Liste des alertes */
+.alert-list {
+  padding: 0;
+  list-style-type: none;
+}
+
+/* Élément de liste d'alerte */
+.alert-item {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 12px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.alert-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Bouton d'alerte en ligne */
+.alert-button {
+  display: flex;
+  flex-direction: row; /* Disposition en ligne */
+  align-items: center; /* Alignement vertical des éléments */
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+  box-sizing: border-box; /* Pour inclure les padding dans la largeur totale */
+}
+
+/* Effet au survol du bouton */
+.alert-button:hover {
+  background-color: #f1f1f1;
+}
+
+/* Conteneur pour les informations de l'alerte */
+.alert-info {
+  display: flex;
+  flex-direction: row; /* Disposition en ligne */
+  align-items: center; /* Alignement vertical des éléments */
+  width: 100%;
+}
+
+/* Icône d'alerte */
+.alert-icon {
+  font-size: 2em;
+  margin-right: 40px;  /* Espacement entre l'icône et le texte */
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+/* Icône de sévérité 'HIGH' */
+.high-severity {
+  color: #e74c3c; /* Rouge vif */
+}
+
+/* Icône de sévérité 'MEDIUM' */
+.medium-severity {
+  color: #f39c12; /* Orange */
+}
+
+/* Icône de sévérité 'LOW' */
+.low-severity {
+  color: #2ecc71; /* Vert */
+}
+
+/* Icône de sévérité 'CRITICAL' */
+.critical-severity {
+  color: #c0392b; /* Rouge très fort */
+}
+
+/* Texte de la sévérité et du message */
+.alert-severity-text {
+  display: flex;
+  flex-direction: column; /* Disposition en colonne pour le texte */
+  margin-right: 20px; /* Espacement entre le texte et la date */
+}
+
+/* Sévérité de l'alerte */
+.alert-severity {
+  font-weight: bold;
+  font-size: 1.2em;
+  text-transform: capitalize;
+  color: #333;
+}
+
+/* Message de l'alerte */
+.alert-message {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Date de l'alerte */
+.alert-date {
+  font-size: 0.9rem;
+  color: #999;
+  margin-left: 10px;
+}
+
+/* Message quand aucune alerte n'est disponible */
+.no-alerts-message {
+  text-align: center;
+  font-size: 1.2em;
+  color: #666;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+mat-icon{
+  height: 30px;
+  width: 30px;
+}
+
+

@@ -24,4 +24,8 @@ export class AlertService {
   getAllAlerts(): Observable<Alert[]> {
     return this.http.get<Alert[]>(this.baseUrl);
   }
+
+  getAlertById(id: number): Observable<Alert> {
+    return this.http.get<Alert>(`${this.baseUrl}/${id}`);
+  }
 }

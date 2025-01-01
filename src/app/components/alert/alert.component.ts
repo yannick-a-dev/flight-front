@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Alert } from '../../model/alert';
 import { AlertService } from '../../services/alert.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alert',
@@ -11,39 +13,53 @@ import { AlertService } from '../../services/alert.service';
 })
 export class AlertsComponent implements OnInit {
   alerts: Alert[] = [];
-  passengerId = 1; 
-  showAllAlerts = false; 
+  alertForm: FormGroup;
+  errorMessage: string | null = null;
 
-  constructor(private alertService: AlertService) {}
+  constructor(
+    private alertService: AlertService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
+    this.alertForm = this.fb.group({
+      passengerId: ['', Validators.required],
+      flightId: ['', Validators.required],
+      alertDate: ['', Validators.required],
+      message: ['', [Validators.required, Validators.maxLength(255)]],
+      severity: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
-    this.loadAlerts(); 
+    this.loadAlerts();
   }
 
+  // Charge toutes les alertes depuis le service
   loadAlerts(): void {
-    if (this.showAllAlerts) {
-      this.alertService.getAllAlerts().subscribe({
-        next: (data) => {
-          this.alerts = data; 
-        },
-        error: (err) => {
-          console.error('Erreur lors de la récupération des alertes:', err); 
-        },
-      });
-    } else {
-      this.alertService.getAlertsForPassenger(this.passengerId).subscribe({
-        next: (data) => {
-          this.alerts = data; 
-        },
-        error: (err) => {
-          console.error('Erreur lors de la récupération des alertes du passager:', err);
-        },
-      });
-    }
+    this.alertService.getAllAlerts().subscribe({
+      next: (data) => {
+        this.alerts = data;
+      },
+      error: (error) => {
+        this.errorMessage = 'Erreur lors de la récupération des alertes';
+        console.error(error);
+      },
+    });
   }
 
-  toggleAlerts(): void {
-    this.showAllAlerts = !this.showAllAlerts; 
-    this.loadAlerts(); 
+  // Crée une nouvelle alerte et redirige vers la liste des alertes
+  createAlert(): void {
+    if (this.alertForm.valid) {
+      const alert = this.alertForm.value;
+      this.alertService.createAlert(alert).subscribe(
+        (response) => {
+          // Redirection vers la page de la liste des alertes
+          this.router.navigate(['/liste-des-alertes']);
+        },
+        (error) => {
+          this.errorMessage = 'Erreur lors de la création de l\'alerte';
+        }
+      );
+    }
   }
 }

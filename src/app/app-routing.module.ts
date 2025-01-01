@@ -4,9 +4,11 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { CreateAlertComponent } from './components/create-alert/create-alert.component';
 import { AuthGuard } from './auth/auth.guard';
 import { UpdatePassengerComponent } from './components/update-passenger/update-passenger.component';
+import { AlertsComponent } from './components/alert/alert.component';
+import { AlertListComponent } from './components/alert-list/alert-list.component';
+import { AlerteDetailComponent } from './components/alerte-detail/alerte-detail.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -14,7 +16,9 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'update-passenger/:id', component: UpdatePassengerComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'create-alert', component: CreateAlertComponent },
+  { path: 'alerts', component: AlertsComponent },
+  { path: 'alerte-detail/:id', component: AlerteDetailComponent },
+  { path: 'liste-des-alertes', component: AlertListComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 

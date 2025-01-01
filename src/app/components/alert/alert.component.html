@@ -1,23 +1,56 @@
-<div class="alert-container">
-    <h2>Alertes Importantes</h2>
-    <button mat-raised-button class="toggle-button" (click)="toggleAlerts()">
-      {{ showAllAlerts ? 'Afficher alertes du passager' : 'Afficher toutes les alertes' }}
-    </button>
-  
-    <div class="alert-grid">
-      <div class="alert-card" *ngFor="let alert of alerts" [ngClass]="alert.severity">
-        <mat-icon class="alert-icon">notification_important</mat-icon>
-        <div class="alert-details">
-          <h4>{{ alert.message }}</h4>
-          <p>Sévérité: <span class="severity">{{ alert.severity }}</span></p>
-          <p>Date: {{ alert.alertDate | date: 'short' }}</p>
-        </div>
-      </div>
-    </div>
-  
-    <ng-template #noAlerts>
-      <p class="no-alerts">Aucune alerte disponible pour le moment.</p>
-    </ng-template>
-  </div>
+<div class="container">
+  <h2>Alertes</h2>
+
+  <!-- Affichage des erreurs -->
+  <div *ngIf="errorMessage" class="mat-error">{{ errorMessage }}</div>
+
+  <!-- Formulaire pour créer une alerte -->
+  <form [formGroup]="alertForm" (ngSubmit)="createAlert()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>ID Passager</mat-label>
+      <input matInput formControlName="passengerId" />
+      <mat-error *ngIf="alertForm.get('passengerId')?.hasError('required')">ID Passager est requis.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>ID Vol</mat-label>
+      <input matInput formControlName="flightId" />
+      <mat-error *ngIf="alertForm.get('flightId')?.hasError('required')">ID Vol est requis.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Date d'Alerte</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="alertDate" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="alertForm.get('alertDate')?.hasError('required')">Date d'Alerte est requise.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Message</mat-label>
+      <textarea matInput formControlName="message"></textarea>
+      <mat-error *ngIf="alertForm.get('message')?.hasError('required')">Le message est requis.</mat-error>
+      <mat-error *ngIf="alertForm.get('message')?.hasError('maxlength')">Le message ne doit pas dépasser 255 caractères.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Sévérité</mat-label>
+      <mat-select formControlName="severity">
+        <mat-option value="LOW">Faible</mat-option>
+        <mat-option value="MEDIUM">Moyenne</mat-option>
+        <mat-option value="HIGH">Haute</mat-option>
+        <mat-option value="CRITICAL">Critique</mat-option>
+      </mat-select>
+      <mat-error *ngIf="alertForm.get('severity')?.hasError('required')">Sévérité est requise.</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!alertForm.valid">Créer alerte</button>
+  </form>
+
+  <!-- Utilisation du composant AlertList pour afficher la liste des alertes -->
+  <!--<app-alert-list [alerts]="alerts"></app-alert-list>-->
+</div>
+
+
   
   

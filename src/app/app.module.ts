@@ -25,8 +25,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { AlertsComponent } from './components/alert/alert.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { CreateAlertComponent } from './components/create-alert/create-alert.component';
 import { MatSelectModule } from '@angular/material/select';
+import { AlerteDetailComponent } from './components/alerte-detail/alerte-detail.component';
+import { AlertListComponent } from './components/alert-list/alert-list.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { MatSelectModule } from '@angular/material/select';
     UpdatePassengerComponent,
     AlertsComponent,
     DashboardComponent,
-    CreateAlertComponent
+    AlerteDetailComponent,
+    AlertListComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatListModule,
     MatIconModule,
     BrowserAnimationsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     provideAnimationsAsync()
