@@ -13,19 +13,20 @@ export class AlertService {
 
   constructor(private http: HttpClient) {}
 
-  getAlertsForPassenger(passengerId: number): Observable<Alert[]> {
-    return this.http.get<Alert[]>(`${this.baseUrl}/${passengerId}`);
-  }
-
   createAlert(alert: Partial<Alert>): Observable<Alert> {
     return this.http.post<Alert>(this.baseUrl, alert);
   }
   
   getAllAlerts(): Observable<Alert[]> {
-    return this.http.get<Alert[]>(this.baseUrl);
-  }
+    return this.http.get<Alert[]>(`${this.baseUrl}/all`);
+  }  
 
   getAlertById(id: number): Observable<Alert> {
-    return this.http.get<Alert>(`${this.baseUrl}/${id}`);
+    return this.http.get<Alert>(`${this.baseUrl}?id=${id}`);
+  }
+
+  // Récupérer les alertes pour un passager
+  getAlertsForPassenger(passengerId: number): Observable<Alert[]> {
+    return this.http.get<Alert[]>(`${this.baseUrl}?passengerId=${passengerId}`);
   }
 }

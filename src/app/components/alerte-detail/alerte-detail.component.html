@@ -1,27 +1,27 @@
 <div *ngIf="alertDetails; else loading">
-    <h2>Détails de l'alerte</h2>
-  
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>{{ alertDetails.message }}</mat-card-title>
-        <mat-card-subtitle>{{ alertDetails.severity }}</mat-card-subtitle>
-      </mat-card-header>
-  
-      <mat-card-content>
-        <p><strong>Date de l'alerte:</strong> {{ alertDetails.alertDate | date: 'short' }}</p>
-        <p><strong>Message:</strong> {{ alertDetails.message }}</p>
-        <p><strong>ID Passager:</strong> {{ alertDetails.passengerId }}</p>
-        <p><strong>ID Vol:</strong> {{ alertDetails.flightId }}</p>
-      </mat-card-content>
-  
-      <mat-card-actions>
-        <button mat-button (click)="goBack()">Retour à la liste</button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
-  
-  <ng-template #loading>
-    <mat-spinner></mat-spinner>
-    <p>Chargement des détails...</p>
-  </ng-template>
-  
+  <h2>Détails de l'alerte</h2>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ alertDetails.message }}</mat-card-title>
+      <mat-card-subtitle>{{ alertDetails.severity }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p><strong>Date de l'alerte:</strong> {{ alertDetails.alertDate | date: 'short' }}</p>
+      <p><strong>Message:</strong> {{ alertDetails.message }}</p>
+      <p><strong>ID Passager:</strong> {{ alertDetails.passengerId }}</p>
+      <p><strong>ID Vol:</strong> {{ alertDetails.flightId }}</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-button (click)="goBack()">Retour à la liste</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+  <p>Chargement des détails...</p>
+</ng-template>
+

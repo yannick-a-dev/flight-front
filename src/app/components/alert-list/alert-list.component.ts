@@ -12,29 +12,52 @@ import { AlertService } from '../../services/alert.service';
 })
 export class AlertListComponent implements OnInit{
 
-  alerts: Alert[] = [];
-  
- // @Input() alerts: Alert[] = [];  // Liste des alertes passée en entrée
+  alerts: Alert[] = []; // Liste des alertes à afficher
+  errorMessage: string | null = null;
 
   constructor(private router: Router, private alertService: AlertService) {}
 
   ngOnInit() {
-    this.getAlerts();  // Charger les alertes dès le début
+    this.getAllAlerts(); // Charger toutes les alertes au démarrage
   }
 
-  getAlerts(): void {
+  /**
+   * Récupère toutes les alertes disponibles.
+   */
+  getAllAlerts(): void {
     this.alertService.getAllAlerts().subscribe(
       (data) => {
-        this.alerts = data;  // Mettre à jour la liste des alertes
+        this.alerts = data;
       },
       (error) => {
-        console.error('Erreur lors du chargement des alertes', error);
+        this.errorMessage = 'Erreur lors du chargement des alertes.';
+        console.error(error);
       }
     );
   }
 
-  // Méthode pour rediriger vers les détails d'une alerte
+  /**
+   * Récupère les alertes pour un passager spécifique.
+   * @param passengerId L'identifiant du passager.
+   */
+  getAlertsForPassenger(passengerId: number): void {
+    this.alertService.getAlertsForPassenger(passengerId).subscribe(
+      (data) => {
+        this.alerts = data;
+        this.errorMessage = null; // Réinitialiser le message d'erreur
+      },
+      (error) => {
+        this.errorMessage = `Erreur lors de la récupération des alertes pour le passager ${passengerId}.`;
+        console.error(error);
+      }
+    );
+  }
+
+  /**
+   * Navigue vers la page de détails d'une alerte spécifique.
+   * @param alertId L'identifiant de l'alerte.
+   */
   viewAlertDetails(alertId: number): void {
-    this.router.navigate(['/alert-details', alertId]);
+    this.router.navigate([`/alerte-detail/${alertId}`]);
   }
 }

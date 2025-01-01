@@ -1,0 +1,79 @@
+/* Style général du composant */
+mat-card {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+  }
+  
+  mat-card-header {
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+  
+  mat-card-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #3f51b5;
+  }
+  
+  mat-card-subtitle {
+    font-size: 1.1em;
+    color: #666;
+  }
+  
+  mat-card-content {
+    font-size: 1em;
+    color: #333;
+  }
+  
+  mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+  }
+  
+  /* Retour à la liste */
+  button {
+    background-color: #e2e7e9;
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #303f9f;
+    cursor: pointer;
+  }
+  
+  /* Style de l'erreur */
+  .error {
+    color: red;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 20px;
+  }
+  
+  /* Style pour le spinner de chargement */
+  mat-spinner {
+    margin: 50px auto;
+    display: block;
+  }
+  
+  p {
+    text-align: center;
+    font-size: 1.1em;
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 2em;
+    color: #3f51b5;
+    margin-bottom: 20px;
+  }
+  

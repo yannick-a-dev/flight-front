@@ -15,12 +15,14 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'update-passenger/:id', component: UpdatePassengerComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'alerts', component: AlertsComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'alerts', component: AlertsComponent, canActivate: [AuthGuard] },
+  { path: 'alert-list', component: AlertListComponent, canActivate: [AuthGuard] },
+  { path: 'liste-des-alertes', component: AlertListComponent }, 
   { path: 'alerte-detail/:id', component: AlerteDetailComponent },
-  { path: 'liste-des-alertes', component: AlertListComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
