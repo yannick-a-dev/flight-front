@@ -12,6 +12,17 @@ mat-card-header {
   border-radius: 8px 8px 0 0; /* Coins arrondis en haut */
 }
 
+.card-header {
+  display: flex;
+  justify-content: space-between;  /* Aligne le titre à gauche et le bouton à droite */
+  align-items: center;  /* Aligne verticalement le titre et le bouton */
+}
+
+/* Style pour le bouton */
+.view-flights-button {
+  margin-left: 20px;  /* Ajoute un espace entre le bouton et le bord droit */
+}
+
 mat-card-title {
   font-size: 24px;
   font-weight: 600;

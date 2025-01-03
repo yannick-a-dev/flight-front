@@ -29,6 +29,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { AlerteDetailComponent } from './components/alerte-detail/alerte-detail.component';
 import { AlertListComponent } from './components/alert-list/alert-list.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FlightComponent } from './components/flight/flight.component';
+import { FlightDialogComponent } from './components/flight-dialog/flight-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     AlertsComponent,
     DashboardComponent,
     AlerteDetailComponent,
-    AlertListComponent
+    AlertListComponent,
+    FlightComponent,
+    FlightDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>{{data.id ? 'Modifier le vol' : 'Ajouter un vol'}}</h1>
+
+<div mat-dialog-content class="dialog-content">
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Numéro de vol</mat-label>
+    <input matInput [(ngModel)]="data.flightNumber" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Aéroport de départ</mat-label>
+    <input matInput [(ngModel)]="data.departureAirport" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Aéroport d'arrivée</mat-label>
+    <input matInput [(ngModel)]="data.arrivalAirport" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Status</mat-label>
+    <input matInput [(ngModel)]="data.status" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Heure de départ</mat-label>
+    <input matInput [(ngModel)]="data.departureTime" type="datetime-local" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Heure d'arrivée</mat-label>
+    <input matInput [(ngModel)]="data.arrivalTime" type="datetime-local" required>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button (click)="onNoClick()" class="cancel-button">Annuler</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data" class="save-button">Enregistrer</button>
+</div>

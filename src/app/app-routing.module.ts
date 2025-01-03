@@ -9,12 +9,14 @@ import { UpdatePassengerComponent } from './components/update-passenger/update-p
 import { AlertsComponent } from './components/alert/alert.component';
 import { AlertListComponent } from './components/alert-list/alert-list.component';
 import { AlerteDetailComponent } from './components/alerte-detail/alerte-detail.component';
+import { FlightComponent } from './components/flight/flight.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'update-passenger/:id', component: UpdatePassengerComponent },
+  { path: 'home/flights', component: FlightComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'alerts', component: AlertsComponent, canActivate: [AuthGuard] },
   { path: 'alert-list', component: AlertListComponent, canActivate: [AuthGuard] },

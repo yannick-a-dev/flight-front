@@ -1,7 +1,8 @@
 <mat-card class="table-card">
-    <mat-card-header>
-      <mat-card-title>Passenger List</mat-card-title>
-    </mat-card-header>
+  <mat-card-header class="card-header">
+    <mat-card-title>Passenger List</mat-card-title>
+    <button mat-raised-button [routerLink]="['flights']" class="view-flights-button">Consulter les vols</button>
+  </mat-card-header>
     <mat-card-content>
       <table mat-table [dataSource]="dataSource">
         <!-- ID Column -->

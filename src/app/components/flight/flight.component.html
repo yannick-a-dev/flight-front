@@ -1,0 +1,50 @@
+<div class="flight-container">
+  <div class="header">
+    <h1>Gestion des vols</h1>
+    <button mat-raised-button color="primary" (click)="openDialog()">Ajouter un vol</button>
+  </div>
+
+  <mat-card class="flight-table-card">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Numéro de vol -->
+      <ng-container matColumnDef="flightNumber">
+        <th mat-header-cell *matHeaderCellDef>Numéro de vol</th>
+        <td mat-cell *matCellDef="let flight">{{ flight.flightNumber }}</td>
+      </ng-container>
+
+      <!-- Heure de départ -->
+      <ng-container matColumnDef="departureTime">
+        <th mat-header-cell *matHeaderCellDef>Heure de départ</th>
+        <td mat-cell *matCellDef="let flight">{{ flight.departureTime | date: 'short' }}</td>
+      </ng-container>
+
+      <!-- Heure d'arrivée -->
+      <ng-container matColumnDef="arrivalTime">
+        <th mat-header-cell *matHeaderCellDef>Heure d'arrivée</th>
+        <td mat-cell *matCellDef="let flight">{{ flight.arrivalTime | date: 'short' }}</td>
+      </ng-container>
+
+      <!-- Status -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let flight">{{ flight.status }}</td>
+      </ng-container>
+
+      <!-- Actions -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let flight">
+          <button mat-icon-button color="primary" (click)="openEditDialog(flight)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteFlight(flight.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card>
+</div>
