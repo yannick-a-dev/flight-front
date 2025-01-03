@@ -4,23 +4,22 @@
     <mat-list-item *ngFor="let alert of alerts" class="alert-item">
       <button mat-button (click)="viewAlertDetails(alert.id)" class="alert-button">
         <div class="alert-info">
-          <!-- Icône pour la sévérité 'HIGH' -->
-          <mat-icon class="alert-icon high-severity" *ngIf="alert.severity === 'HIGH'">warning</mat-icon>
+          <!-- Bloc pour l'icône de sévérité -->
+          <div class="alert-icon-block">
+            <mat-icon class="alert-icon high-severity" *ngIf="alert.severity === 'HIGH'">warning</mat-icon>
+            <mat-icon class="alert-icon medium-severity" *ngIf="alert.severity === 'MEDIUM'">info</mat-icon>
+            <mat-icon class="alert-icon low-severity" *ngIf="alert.severity === 'LOW'">check_circle</mat-icon>
+            <mat-icon class="alert-icon critical-severity" *ngIf="alert.severity === 'CRITICAL'">priority_high</mat-icon>
+          </div>
 
-          <!-- Icône pour la sévérité 'MEDIUM' -->
-          <mat-icon class="alert-icon medium-severity" *ngIf="alert.severity === 'MEDIUM'">info</mat-icon>
-
-          <!-- Icône pour la sévérité 'LOW' -->
-          <mat-icon class="alert-icon low-severity" *ngIf="alert.severity === 'LOW'">check_circle</mat-icon>
-
-          <!-- Icône pour la sévérité 'CRITICAL' -->
-          <mat-icon class="alert-icon critical-severity" *ngIf="alert.severity === 'CRITICAL'">priority_high</mat-icon>
-          
-          <div class="alert-severity-text">
+          <!-- Bloc pour la sévérité et le message -->
+          <div class="alert-text-block">
             <span class="alert-severity">{{ alert.severity }}</span>
             <span class="alert-message">{{ alert.message }}</span>
           </div>
-          <div class="alert-date">
+
+          <!-- Bloc pour la date -->
+          <div class="alert-date-block">
             <span>Date: {{ alert.alertDate | date: 'short' }}</span>
           </div>
         </div>      
@@ -33,3 +32,4 @@
 <div *ngIf="alerts.length === 0" class="no-alerts-message">
   <p>Aucune alerte disponible.</p>
 </div>
+

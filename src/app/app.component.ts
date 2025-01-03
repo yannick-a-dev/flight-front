@@ -21,8 +21,4 @@ export class AppComponent {
       }
     });
   }
-
-  goBack(): void {
-    window.history.back(); 
-  }
 }

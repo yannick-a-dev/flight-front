@@ -71,12 +71,16 @@
   width: 100%;
 }
 
+/* Bloc pour l'icône d'alerte */
+.alert-icon-block {
+  flex-shrink: 0;
+  margin-right: 10px;
+}
+
 /* Icône d'alerte */
 .alert-icon {
   font-size: 2em;
-  margin-right: 40px;  /* Espacement entre l'icône et le texte */
-  margin-left: 10px;
-  margin-bottom: 10px;
+  margin-right: 10px;  /* Espacement entre l'icône et le texte */
 }
 
 /* Icône de sévérité 'HIGH' */
@@ -99,7 +103,16 @@
   color: #c0392b; /* Rouge très fort */
 }
 
-/* Texte de la sévérité et du message */
+/* Bloc pour le texte de la sévérité et du message */
+.alert-text-block {
+  flex-grow: 1;
+  margin-right: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Texte de la sévérité */
 .alert-severity-text {
   display: flex;
   flex-direction: column; /* Disposition en colonne pour le texte */
@@ -109,6 +122,7 @@
 /* Sévérité de l'alerte */
 .alert-severity {
   font-weight: bold;
+  margin-right: 10px;
   font-size: 1.2em;
   text-transform: capitalize;
   color: #333;
@@ -118,6 +132,19 @@
 .alert-message {
   font-size: 1rem;
   color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: break-word;  /* Permet au texte de passer à la ligne suivante */
+  overflow-wrap: break-word; /* Assure la compatibilité */
+  white-space: normal;  /* Autorise le retour à la ligne */
+}
+
+/* Bloc pour la date de l'alerte */
+.alert-date-block {
+  flex-shrink: 0;
+  text-align: right;
+  white-space: nowrap;
 }
 
 /* Date de l'alerte */
@@ -139,9 +166,8 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-mat-icon{
+/* Style pour les icônes */
+mat-icon {
   height: 30px;
   width: 30px;
 }
-
-

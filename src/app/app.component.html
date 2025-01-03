@@ -1,10 +1,10 @@
 <mat-toolbar class="blue-toolbar">
   <span>My Application</span>
   <span class="spacer"></span>
+  <button mat-button routerLink="/home">Home</button>
   <button mat-button routerLink="/dashboard">Dashboard</button>
   <button *ngIf="currentRoute !== '/login' && currentRoute !== '/dashboard'" mat-button routerLink="/login">Login</button>
   <button *ngIf="currentRoute !== '/register' && currentRoute !== '/dashboard'" mat-button routerLink="/register">Register</button>
-  <button *ngIf="currentRoute === '/dashboard'" mat-button (click)="goBack()">Retour</button>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
