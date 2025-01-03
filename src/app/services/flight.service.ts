@@ -19,9 +19,9 @@ export class FlightService {
     return this.http.get<Flight[]>(this.baseUrl);
   }
 
-  // Ajouter un vol
-  createFlight(flight: Flight): Observable<Flight> {
-    return this.http.post<Flight>(this.baseUrl, flight);
+
+  createFlight(flightDto: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl, flightDto);
   }
 
   // Mettre à jour un vol

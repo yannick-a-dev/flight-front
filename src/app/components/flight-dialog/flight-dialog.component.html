@@ -1,38 +1,71 @@
-<h1 mat-dialog-title>{{data.id ? 'Modifier le vol' : 'Ajouter un vol'}}</h1>
+<div class="flight-form-container">
+  <h2>Create Flight</h2>
+  <form [formGroup]="flightForm" (ngSubmit)="onSubmit()">
 
-<div mat-dialog-content class="dialog-content">
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Numéro de vol</mat-label>
-    <input matInput [(ngModel)]="data.flightNumber" required>
-  </mat-form-field>
+    <div class="form-group">
+      <label for="flightNumber">Flight Number</label>
+      <input id="flightNumber" formControlName="flightNumber" type="text" class="form-control" placeholder="Enter Flight Number">
+      <div *ngIf="formControls['flightNumber'].invalid && formControls['flightNumber'].touched" class="error-message">
+        Flight number is required and must be between 3 and 10 characters.
+      </div>
+    </div>
 
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Aéroport de départ</mat-label>
-    <input matInput [(ngModel)]="data.departureAirport" required>
-  </mat-form-field>
+    <div class="form-group">
+      <label for="departureTime">Departure Time</label>
+      <input id="departureTime" formControlName="departureTime" type="datetime-local" class="form-control">
+      <div *ngIf="formControls['departureTime'].invalid && formControls['departureTime'].touched" class="error-message">
+        Departure time is required and must be a valid date in the past or present.
+      </div>
+    </div>
 
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Aéroport d'arrivée</mat-label>
-    <input matInput [(ngModel)]="data.arrivalAirport" required>
-  </mat-form-field>
+    <div class="form-group">
+      <label for="arrivalTime">Arrival Time</label>
+      <input id="arrivalTime" formControlName="arrivalTime" type="datetime-local" class="form-control">
+      <div *ngIf="formControls['arrivalTime'].invalid && formControls['arrivalTime'].touched" class="error-message">
+        Arrival time is required and must be a valid date in the future.
+      </div>
+    </div>
 
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Status</mat-label>
-    <input matInput [(ngModel)]="data.status" required>
-  </mat-form-field>
+    <div class="form-group">
+      <label for="departureAirport">Departure Airport</label>
+      <input id="departureAirport" formControlName="departureAirport" type="text" class="form-control" placeholder="Enter Departure Airport">
+      <div *ngIf="formControls['departureAirport'].invalid && formControls['departureAirport'].touched" class="error-message">
+        Departure airport is required and must be exactly 3 characters.
+      </div>
+    </div>
 
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Heure de départ</mat-label>
-    <input matInput [(ngModel)]="data.departureTime" type="datetime-local" required>
-  </mat-form-field>
+    <div class="form-group">
+      <label for="arrivalAirport">Arrival Airport</label>
+      <input id="arrivalAirport" formControlName="arrivalAirport" type="text" class="form-control" placeholder="Enter Arrival Airport">
+      <div *ngIf="formControls['arrivalAirport'].invalid && formControls['arrivalAirport'].touched" class="error-message">
+        Arrival airport is required and must be exactly 3 characters.
+      </div>
+    </div>
 
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Heure d'arrivée</mat-label>
-    <input matInput [(ngModel)]="data.arrivalTime" type="datetime-local" required>
-  </mat-form-field>
-</div>
+    <div class="form-group">
+      <label for="status">Status</label>
+      <input id="status" formControlName="status" type="text" class="form-control" placeholder="Enter Status">
+      <div *ngIf="formControls['status'].invalid && formControls['status'].touched" class="error-message">
+        Status is required and must be between 1 and 50 characters.
+      </div>
+    </div>
 
-<div mat-dialog-actions class="dialog-actions">
-  <button mat-button (click)="onNoClick()" class="cancel-button">Annuler</button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="data" class="save-button">Enregistrer</button>
+    <div class="form-group">
+      <label for="reservations">Reservations</label>
+      <input id="reservations" formControlName="reservations" type="text" class="form-control" placeholder="Enter Reservations">
+      <div *ngIf="formControls['reservations'].invalid && formControls['reservations'].touched" class="error-message">
+        Reservations list is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="alerts">Alerts</label>
+      <input id="alerts" formControlName="alerts" type="text" class="form-control" placeholder="Enter Alerts">
+      <div *ngIf="formControls['alerts'].invalid && formControls['alerts'].touched" class="error-message">
+        Alerts list is required.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </div>

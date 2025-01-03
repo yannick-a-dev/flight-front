@@ -1,100 +1,69 @@
-/* Style général du formulaire de dialogue */
-.dialog-content {
-    padding: 15px;  /* Réduction de la hauteur du padding */
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    font-size: 14px;
-    max-width: 600px;  /* Augmentation de la largeur maximale */
+.flight-form-container {
     width: 100%;
-    height: auto;  /* Laisser la hauteur s'adapter au contenu */
-}
-
-/* Style du titre dans le dialogue */
-h1.mat-dialog-title {
-    font-size: 1.5rem; /* Taille de la police du titre */
-    font-weight: 600;
-    color: #3f51b5; /* Couleur professionnelle et agréable */
-    margin-bottom: 10px;  /* Espacement sous le titre */
-    text-align: center;
-}
-
-/* Espacement et alignement des champs du formulaire */
-.mat-form-field {
-    width: 100%;
-    margin-bottom: 15px; /* Espacement entre les champs */
-}
-
-/* Style des étiquettes des champs de formulaire */
-.mat-form-field .mat-form-field-label {
-    font-weight: 500;
-    color: #3f51b5; /* Couleur des labels */
-}
-
-/* Style des champs de saisie dans le formulaire */
-.mat-form-field .mat-input-element {
-    font-size: 1rem;
-}
-
-/* Style des boutons dans le dialogue */
-.dialog-actions {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 10px;  /* Réduction du padding supérieur */
-    border-top: 1px solid #ddd;
-}
-
-/* Style pour le bouton "Annuler" */
-.cancel-button {
-    background-color: #e0e0e0;
-    color: #333;
-    min-width: 110px;  /* Largeur réduite du bouton */
-    padding: 8px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease-in-out;
-}
-
-.cancel-button:hover {
-    background-color: #c5c5c5;
-}
-
-/* Style pour le bouton "Enregistrer" */
-.save-button {
-    background-color: #3f51b5;
-    color: white;
-    min-width: 110px;  /* Largeur réduite du bouton */
-    padding: 8px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease-in-out;
-}
-
-.save-button:hover {
-    background-color: #303f9f;
-}
-
-/* Style des champs datetime-local */
-input[type="datetime-local"] {
-    padding: 8px;  /* Réduction du padding */
-    border-radius: 4px;
+    max-width: 600px;
+    padding: 20px;  /* Plus de padding pour éviter la compacité */
+    margin-top: 20px;  /* Marges pour éloigner du header */
     border: 1px solid #ccc;
-    font-size: 1rem;
-    width: 100%;
-    transition: border-color 0.3s ease;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espacement entre les éléments */
+    align-items: center;
+    height: auto;  /* Laisse le formulaire s'ajuster à son contenu */
 }
 
-input[type="datetime-local"]:focus {
-    border-color: #3f51b5;
+h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input.form-control {
+    width: 80%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input.form-control:focus {
+    border-color: #007bff;
     outline: none;
 }
 
-/* Style de la fenêtre de dialogue */
-.mat-dialog-container {
-    background-color: #ffffff;
-    border-radius: 10px;
-    padding: 25px;  /* Réduction du padding pour une forme plus compacte */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.error-message {
+    color: #ff0000;
+    font-size: 0.875em;
+    margin-top: 5px;
 }
 
-/* Animation pour le champ de texte au focus */
-.mat-form-field .mat-form-field-ripple {
-    background-color: #3f51b5 !important;
+button.btn-primary {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px; /* Plus d'espace entre le dernier champ et le bouton */
 }
+
+button.btn-primary:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+button.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+
+  
+  

@@ -40,7 +40,7 @@ export class FlightComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.flightService.createFlight(result).subscribe(() => {
-          this.loadFlights(); // Rafraîchir la liste après ajout
+          this.loadFlights(); 
         });
       }
     });
