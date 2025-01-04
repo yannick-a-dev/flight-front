@@ -1,52 +1,65 @@
 /* Style général pour la section contenant le tableau */
 .container {
     margin: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
+    padding: 30px;
+    background-color: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
-/* Titre principal (ajout d'un titre optionnel) */
+.container:hover {
+    transform: translateY(-5px); /* Effet de levée lors du survol */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Titre principal */
 .container h1 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     margin-bottom: 20px;
     color: #3f51b5;
-    font-weight: bold;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 /* Style du bouton "Ajouter un vol" */
 button[mat-raised-button] {
-    background-color: #3f51b5; /* Couleur primaire */
+    background-color: #3f51b5; /* Couleur principale */
     color: white;
     font-weight: 600;
     margin-bottom: 20px;
-    padding: 12px 24px;
-    border-radius: 6px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 14px 28px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 button[mat-raised-button]:hover {
     background-color: #303f9f; /* Variation pour le survol */
     transform: scale(1.05); /* Légère mise en avant */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Ombre au survol */
 }
 
 /* Style du tableau */
 table.mat-table {
     width: 100%;
-    margin-top: 10px;
-    border-collapse: collapse;
+    margin-top: 15px;
+    border-collapse: separate;
+    border-spacing: 0 10px; /* Espacement entre les lignes */
 }
 
 /* Style des entêtes du tableau */
 th.mat-header-cell {
     background-color: #3f51b5;
     color: white;
-    padding: 14px;
+    padding: 16px;
     font-weight: 600;
     text-align: left;
-    border: 1px solid #ddd;
+    border-radius: 8px 8px 0 0;
     text-transform: uppercase;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
 }
 
 th.mat-header-cell:hover {
@@ -55,32 +68,47 @@ th.mat-header-cell:hover {
 
 /* Style des cellules du tableau */
 td.mat-cell {
-    padding: 14px;
+    padding: 14px 20px;
     font-size: 15px;
+    color: #333;
     text-align: left;
-    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+/* Effet sur les cellules au survol */
+td.mat-cell:hover {
+    background-color: #e0e0e0;
 }
 
 /* Actions (boutons Modifier/Supprimer) */
-button.mat-button {
-    background-color: #4caf50;
-    color: white;
-    transition: background-color 0.3s ease;
-    padding: 8px 16px;
-    border-radius: 4px;
+button.mat-icon-button {
+    background-color: transparent;
+    color: #757575;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0 5px;
+    padding: 8px;
 }
 
-button.mat-button:hover {
-    background-color: #388e3c;
+button.mat-icon-button[color="primary"] {
+    color: #3f51b5; /* Couleur primaire pour Modifier */
 }
 
-button.mat-button[color="warn"] {
-    background-color: #f44336;
-    color: white;
+button.mat-icon-button[color="primary"]:hover {
+    background-color: rgba(63, 81, 181, 0.1);
+    color: #303f9f;
 }
 
-button.mat-button[color="warn"]:hover {
-    background-color: #d32f2f;
+button.mat-icon-button[color="warn"] {
+    color: #f44336; /* Couleur pour Supprimer */
+}
+
+button.mat-icon-button[color="warn"]:hover {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: #d32f2f;
 }
 
 /* Style des lignes impaires (alternance de couleurs) */
@@ -95,8 +123,8 @@ tr.mat-row:hover {
 
 /* Style des bordures et des coins arrondis du tableau */
 .mat-elevation-z8 {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
     overflow: hidden;
 }
 
@@ -109,7 +137,7 @@ th.mat-header-cell, td.mat-cell {
 /* Réactivité (tableau responsive pour les petits écrans) */
 @media (max-width: 768px) {
     .container {
-        padding: 12px;
+        padding: 15px;
     }
 
     table.mat-table {
@@ -118,7 +146,7 @@ th.mat-header-cell, td.mat-cell {
 
     button[mat-raised-button] {
         font-size: 14px;
-        padding: 10px 20px;
+        padding: 12px 20px;
     }
 
     td.mat-cell {
@@ -130,3 +158,7 @@ th.mat-header-cell, td.mat-cell {
         padding-right: 10px;
     }
 }
+
+
+
+

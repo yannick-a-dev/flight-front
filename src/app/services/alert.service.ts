@@ -20,13 +20,12 @@ export class AlertService {
   getAllAlerts(): Observable<Alert[]> {
     return this.http.get<Alert[]>(`${this.baseUrl}/all`);
   }  
-
   getAlertById(id: number): Observable<Alert> {
-    return this.http.get<Alert>(`${this.baseUrl}?id=${id}`);
+    return this.http.get<Alert>(`${this.baseUrl}/${id}`);
   }
-
-  // Récupérer les alertes pour un passager
+  
   getAlertsForPassenger(passengerId: number): Observable<Alert[]> {
-    return this.http.get<Alert[]>(`${this.baseUrl}?passengerId=${passengerId}`);
+    return this.http.get<Alert[]>(`${this.baseUrl}/passenger/${passengerId}`);
   }
+  
 }

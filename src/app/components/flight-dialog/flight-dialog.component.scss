@@ -1,68 +1,132 @@
+/* Conteneur du formulaire */
 .flight-form-container {
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;  /* Plus de padding pour éviter la compacité */
-    margin-top: 20px;  /* Marges pour éloigner du header */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Espacement entre les éléments */
-    align-items: center;
-    height: auto;  /* Laisse le formulaire s'ajuster à son contenu */
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-input.form-control {
-    width: 80%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-input.form-control:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-.error-message {
-    color: #ff0000;
-    font-size: 0.875em;
-    margin-top: 5px;
-}
-
-button.btn-primary {
-    width: 100%;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
     padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    height: 75vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Titre */
+  .flight-form-container h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+    color: #333;
+  }
+  
+  /* Champs de formulaire */
+  .mat-form-field {
+    width: 100%;
+    margin-bottom: 10px; /* Espacement uniforme */
+    background-color: #fff;
     border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 15px; /* Plus d'espace entre le dernier champ et le bouton */
-}
+  }
+  
+  /* Pour les champs disposés côte à côte (grille) */
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Créer une grille à 2 colonnes */
+    gap: 20px; /* Espacement entre les colonnes */
+  }
+  
+  /* Champs de formulaire dans la grille */
+  .form-row .mat-form-field {
+    width: 100%;
+  }
+  
+  /* Boutons */
+  button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 6px;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  /* Bouton de suppression */
+  button[mat-icon-button] {
+    margin-left: 10px;
+    border-radius: 50%;
+    background-color: #ffcccc;
+    padding: 8px;
+  }
+  
+  /* Amélioration de la responsivité */
+  @media (max-width: 768px) {
+    .flight-form-container {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    .mat-form-field {
+      margin-bottom: 12px;
+    }
+  
+    button {
+      width: 100%;
+      padding: 5px;
+    }
+  
+    .form-row {
+      grid-template-columns: 1fr; /* Les champs occupent toute la largeur sur mobile */
+    }
+    
+    .form-group {
+      margin-bottom: 10px;
+    }
+  }
+  
+  /* Section réservations et alertes */
+  .form-group {
+    margin-bottom: 10px; /* Espacement entre les sections */
+  }
+  
+  .form-array-item {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background-color: #fafafa;
+  }
+  
+  button.mat-raised-button {
+    margin-top: 5px;
+  }
+  
+  /* Style des boutons de suppression */
+  button[mat-icon-button] {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
+  /* Amélioration de l'apparence des boutons */
+  button[mat-raised-button] {
+    padding: 3px;
+    font-size: 1rem;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
 
-button.btn-primary:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-}
-
-button.btn-primary:hover {
-    background-color: #0056b3;
-}
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
   

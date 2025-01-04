@@ -30,38 +30,30 @@ export class FlightComponent implements OnInit {
     });
   }
 
-  // Ajouter un nouveau vol
-  openDialog(): void {
-    const dialogRef = this.dialog.open(FlightDialogComponent, {
-      width: '250px',
-      data: {}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.flightService.createFlight(result).subscribe(() => {
-          this.loadFlights(); 
-        });
-      }
-    });
-  }
-
-  // Mettre à jour un vol
   openEditDialog(flight: Flight): void {
     const dialogRef = this.dialog.open(FlightDialogComponent, {
-      width: '250px',
-      data: flight
+      data: flight,  
     });
-
-    dialogRef.afterClosed().subscribe(result => {
+  
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.flightService.updateFlight(flight.id, result).subscribe(() => {
-          this.loadFlights(); // Rafraîchir la liste après mise à jour
-        });
+        this.loadFlights();  
       }
     });
   }
-
+  
+  openDialog(): void {
+    const dialogRef = this.dialog.open(FlightDialogComponent, {
+      data: null,  
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.loadFlights(); 
+      }
+    });
+  }
+  
   // Supprimer un vol
   deleteFlight(id: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer ce vol?')) {
