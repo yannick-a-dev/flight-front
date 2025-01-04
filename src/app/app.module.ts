@@ -31,6 +31,7 @@ import { AlertListComponent } from './components/alert-list/alert-list.component
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FlightComponent } from './components/flight/flight.component';
 import { FlightDialogComponent } from './components/flight-dialog/flight-dialog.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { FlightDialogComponent } from './components/flight-dialog/flight-dialog.
     MatIconModule,
     BrowserAnimationsModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatChipsModule
   ],
   providers: [
     provideAnimationsAsync()

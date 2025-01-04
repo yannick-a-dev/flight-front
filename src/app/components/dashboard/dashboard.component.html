@@ -1,24 +1,24 @@
 <div class="dashboard-container">
-    <h1>Tableau de Bord Principal</h1>
-  
-    <div class="summary-section">
-      <h2>Résumé des Activités</h2>
-      <p>Bienvenue {{ user?.firstName }} ! Voici les dernières informations importantes.</p>
-    </div>
-  
-    <div class="alerts-section">
-      <h2>Alertes Critiques</h2>
-      <app-alert></app-alert>
-    </div>
+  <mat-card class="dashboard-card">
+    <mat-card-header>
+      <mat-card-title class="title">Tableau de Bord Principal</mat-card-title>
+    </mat-card-header>
 
-    
-       <!-- 
-      <div class="create-alert-section">
-        <button mat-raised-button color="primary" (click)="redirectToCreateAlert()">
-      Créer une Alerte
-    </button>
-    </div>
-       -->
-  
-  </div>
+    <mat-card-content>
+      <div class="summary-section">
+        <mat-divider></mat-divider>
+        <h2>Résumé des Activités</h2>
+        <p>Bienvenue <strong>{{ user?.firstName }}</strong> ! Voici les dernières informations importantes.</p>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="alerts-section">
+        <h2>Alertes Critiques</h2>
+        <app-alert></app-alert>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
   

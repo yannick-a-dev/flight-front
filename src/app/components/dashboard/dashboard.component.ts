@@ -27,4 +27,10 @@ export class DashboardComponent implements OnInit {
   redirectToCreateAlert(): void {
     this.router.navigate(['/create-alert']); // Remplacez par votre route de création d'alerte
   }
+
+  onRefresh(): void {
+    // Logique pour rafraîchir les données
+    console.log("Données rafraîchies !");
+    // Par exemple, vous pourriez appeler un service pour récupérer des données mises à jour ici
+  }
 }
