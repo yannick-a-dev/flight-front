@@ -4,11 +4,12 @@ import { Flight } from '../../model/flight';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FlightService } from '../../services/flight.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-flight-dialog',
   standalone: false,
-  
+
   templateUrl: './flight-dialog.component.html',
   styleUrl: './flight-dialog.component.scss'
 })
@@ -22,36 +23,70 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
   constructor(
     private fb: FormBuilder,
     private flightService: FlightService,
-    private dialogRef: MatDialogRef<FlightDialogComponent>, 
+    private dialogRef: MatDialogRef<FlightDialogComponent>,
     private router: Router,
-    @Inject(MAT_DIALOG_DATA) public data: any 
+    public datePipe: DatePipe,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit(): void {
     if (this.data) {
       this.isEditMode = !!this.data?.flightNumber;
+      this.flight = this.data; // Assurez-vous que 'flight' est bien initialisé
     } else {
-      this.isEditMode = false; 
+      this.isEditMode = false;
+      this.flight = {}; // Initialisation de flight à un objet vide en mode création
     }
-  
+
+    const formattedDepartureTime = this.datePipe.transform(this.data?.departureTime, 'yyyy-MM-dd HH:mm:ss') || '';
+    const formattedArrivalTime = this.datePipe.transform(this.data?.arrivalTime, 'yyyy-MM-dd HH:mm:ss') || '';
+
+    console.log('Formatted Departure Time:', formattedDepartureTime);
+    console.log('Formatted Arrival Time:', formattedArrivalTime);
+
     this.flightForm = this.fb.group({
       flightNumber: [this.data?.flightNumber || '', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      departureTime: [this.data?.departureTime || '', Validators.required],
-      arrivalTime: [this.data?.arrivalTime || '', Validators.required],
+      departureTime: [formattedDepartureTime, Validators.required],
+      arrivalTime: [formattedArrivalTime, Validators.required],
       departureAirport: [this.data?.departureAirport || '', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       arrivalAirport: [this.data?.arrivalAirport || '', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       status: [this.data?.status || '', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
       reservations: this.fb.array(this.data?.reservations || []),
       alerts: this.fb.array(this.data?.alerts || []),
     });
-  
-    console.log('Initial form value:', this.flightForm.value);
-    console.log('Initial form validity:', this.flightForm.valid);
-    console.log('Form errors:', this.flightForm.errors);
-  
-    this.flightForm.statusChanges.subscribe(status => {
-      console.log('Form status changed:', status);
-    });
+  }
+
+  onSubmit(): void {
+    console.log('Form status:', this.flightForm.status); // Affiche l'état du formulaire
+    console.log('Form value:', this.flightForm.value);
+
+    // Affichage de l'état de chaque contrôle
+    for (const controlName in this.flightForm.controls) {
+      if (this.flightForm.controls.hasOwnProperty(controlName)) {
+        const control = this.flightForm.get(controlName);
+        console.log(`Control: ${controlName}, Valid: ${control?.valid}, Errors:`, control?.errors);
+      }
+    }
+
+    if (this.flightForm.valid) {
+      const flightData = this.flightForm.value;
+
+      if (this.isEditMode && this.flight?.flightNumber) { // Vérifier que 'flight' est bien défini
+        // Logique pour la mise à jour du vol
+        this.flightService.updateFlight(this.flight.flightNumber, flightData).subscribe(response => {
+          this.dialogRef.close(response);
+          this.router.navigate(['home/flights']);
+        });
+      } else {
+        // Logique pour la création d'un nouveau vol
+        this.flightService.createFlight(flightData).subscribe(response => {
+          this.dialogRef.close(response);
+          this.router.navigate(['home/flights']);
+        });
+      }
+    } else {
+      console.log("Formulaire invalide");
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -66,7 +101,7 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
       });
     }
   }
-  
+
   ngAfterViewInit(): void {
     // Ajout de l'écouteur d'événement 'wheel' avec passive: true
     const element = document.getElementById('yourElementId'); // Remplacez par l'ID approprié
@@ -119,39 +154,6 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
     this.alerts.removeAt(index);
   }
 
-  onSubmit(): void {
-    console.log('Form status:', this.flightForm.status); // Affiche l'état du formulaire
-    console.log('Form value:', this.flightForm.value);
-  
-    // Affichage de l'état de chaque contrôle
-    for (const controlName in this.flightForm.controls) {
-      if (this.flightForm.controls.hasOwnProperty(controlName)) {
-        const control = this.flightForm.get(controlName);
-        console.log(`Control: ${controlName}, Valid: ${control?.valid}, Errors:`, control?.errors);
-      }
-    }
-  
-    if (this.flightForm.valid) {
-      const flightData = this.flightForm.value;
-  
-      if (this.isEditMode) {
-        // Logique pour la mise à jour du vol
-        this.flightService.updateFlight(this.flight.flightNumber, flightData).subscribe(response => {
-          this.dialogRef.close(response);
-          this.router.navigate(['/flights']);
-        });
-      } else {
-        // Logique pour la création d'un nouveau vol
-        this.flightService.createFlight(flightData).subscribe(response => {
-          this.dialogRef.close(response);
-          this.router.navigate(['/flights']);
-        });
-      }
-    } else {
-      console.log("Formulaire invalide");
-    }
-  }
-  
   // Méthode de gestion de l'événement 'wheel'
   onWheelEvent(event: WheelEvent): void {
     console.log('Wheel event triggered', event);

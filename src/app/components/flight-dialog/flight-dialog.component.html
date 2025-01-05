@@ -20,7 +20,8 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Departure Time</mat-label>
-        <input matInput id="departureTime" formControlName="departureTime" type="datetime-local" />
+        <input matInput id="departureTime" formControlName="departureTime" type="datetime-local"
+          [value]="datePipe.transform(flightForm.get('departureTime')?.value, 'yyyy-MM-ddTHH:mm:ss')" />
         <mat-error *ngIf="formControls['departureTime'].hasError('required') && formControls['departureTime'].touched">
           Departure time is required.
         </mat-error>
@@ -31,7 +32,8 @@
     <div class="form-row">
       <mat-form-field appearance="outline">
         <mat-label>Arrival Time</mat-label>
-        <input matInput id="arrivalTime" formControlName="arrivalTime" type="datetime-local" />
+        <input matInput id="arrivalTime" formControlName="arrivalTime" type="datetime-local"
+          [value]="datePipe.transform(flightForm.get('arrivalTime')?.value, 'yyyy-MM-ddTHH:mm:ss')" />
         <mat-error *ngIf="formControls['arrivalTime'].hasError('required') && formControls['arrivalTime'].touched">
           Arrival time is required.
         </mat-error>

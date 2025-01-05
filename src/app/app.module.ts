@@ -32,6 +32,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FlightComponent } from './components/flight/flight.component';
 import { FlightDialogComponent } from './components/flight-dialog/flight-dialog.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { MatChipsModule } from '@angular/material/chips';
     MatChipsModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
