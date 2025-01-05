@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'alerts', component: AlertsComponent, canActivate: [AuthGuard] },
   { path: 'alert-list', component: AlertListComponent, canActivate: [AuthGuard] },
   { path: 'liste-des-alertes', component: AlertListComponent }, 
+  { path: 'create-alert/:id', component: AlertsComponent },
   { path: 'alerte-detail/:id', component: AlerteDetailComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
