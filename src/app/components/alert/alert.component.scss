@@ -1,20 +1,28 @@
 /* Container principal */
 .container {
+  position: fixed; /* Positionne l'élément de manière fixe par rapport à la fenêtre */
+  top: 50%; /* Positionne l'élément à 50% de la hauteur de la fenêtre */
+  left: 50%; /* Positionne l'élément à 50% de la largeur de la fenêtre */
+  transform: translate(-50%, -50%); /* Décale l'élément pour le centrer complètement */
   max-width: 800px;
-  margin: 20px auto;
-  margin-top: 80px;
+  width: 100%; /* S'assure que l'élément prend toute la largeur possible */
+  padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 37px; /* Supprime la marge supérieure, car on utilise un positionnement fixe */
+  margin-bottom: 0; /* Assure qu'il n'y a pas de marge en bas */
 }
+
 
 /* Titre principal */
 .container h2 {
   font-size: 2rem;
   color: #333;
   text-align: center;
-  margin-bottom: 5px;
+  margin: 0; /* Supprime les marges par défaut */
 }
+
 
 /* Formulaire */
 form {
