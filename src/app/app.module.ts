@@ -33,6 +33,7 @@ import { FlightComponent } from './components/flight/flight.component';
 import { FlightDialogComponent } from './components/flight-dialog/flight-dialog.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { DatePipe } from '@angular/common';
+import { FlightStatusPipe } from './model/flight-status.pipe';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { DatePipe } from '@angular/common';
     AlerteDetailComponent,
     AlertListComponent,
     FlightComponent,
-    FlightDialogComponent
+    FlightDialogComponent,
+    FlightStatusPipe
   ],
   imports: [
     BrowserModule,

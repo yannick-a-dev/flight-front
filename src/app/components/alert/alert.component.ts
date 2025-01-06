@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Alert } from '../../model/alert';
 import { AlertService } from '../../services/alert.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Passenger } from '../../model/model';
 import { PassengerService } from '../../services/passenger.service';
@@ -17,7 +17,7 @@ export class AlertsComponent implements OnInit {
   alerts: Alert[] = [];
   alertForm: FormGroup;
   errorMessage: string | null = null;
-  passenger: Passenger | null = null;  // Passager récupéré pour pré-remplir le formulaire
+  passenger: Passenger | null = null;
 
   constructor(
     private alertService: AlertService,
@@ -28,39 +28,35 @@ export class AlertsComponent implements OnInit {
   ) {
     this.alertForm = this.fb.group({
       passengerId: ['', Validators.required],
-      flightId: ['', Validators.required],
-      alertDate: ['', Validators.required],
+      flightNumber: ['', Validators.required],
+      alertDate: ['', [Validators.required, this.validDateValidator]], // Validation de la date
       message: ['', [Validators.required, Validators.maxLength(255)]],
       severity: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
-    // Récupérer l'ID du passager depuis la route si disponible
-    const passengerId = this.activatedRoute.snapshot.paramMap.get('id') || this.activatedRoute.snapshot.queryParamMap.get('id');
+    // Récupérer l'ID du passager depuis les paramètres de route
+    this.activatedRoute.paramMap.subscribe((params) => {
+      const passengerId = params.get('id');
 
-    // Vérifier si l'ID est défini, le convertir en number et récupérer les informations du passager
-    if (passengerId) {
-      const passengerIdNumber = Number(passengerId);  // Conversion en nombre
+      if (passengerId) {
+        const passengerIdNumber = Number(passengerId);
 
-      if (!isNaN(passengerIdNumber)) {
-        // Si la conversion réussit, récupérer les informations du passager
-        this.passengerService.getPassengerById(passengerIdNumber).subscribe({
-          next: (data) => {
-            this.passenger = data;
-            // Prérémplir le formulaire avec les informations du passager
-            this.alertForm.patchValue({
-              passengerId: this.passenger?.id
-            });
-          },
-          error: (err) => {
-            console.error('Erreur lors de la récupération du passager:', err);
-          }
-        });
-      } else {
-        console.error('L\'ID du passager n\'est pas valide');
+        if (!isNaN(passengerIdNumber)) {
+          this.passengerService.getPassengerById(passengerIdNumber).subscribe({
+            next: (data) => {
+              this.passenger = data;
+              // Préremplir le champ passager dans le formulaire
+              this.alertForm.patchValue({ passengerId: data.id });
+            },
+            error: (err) => this.handleError(err, 'la récupération du passager'),
+          });
+        } else {
+          console.error('L\'ID du passager n\'est pas valide');
+        }
       }
-    }
+    });
 
     // Charger les alertes existantes
     this.loadAlerts();
@@ -72,25 +68,49 @@ export class AlertsComponent implements OnInit {
         this.alerts = data;
       },
       error: (error) => {
-        this.errorMessage = 'Erreur lors de la récupération des alertes';
-        console.error(error);
+        this.handleError(error, 'la récupération des alertes');
       },
     });
   }
 
-  // Crée une nouvelle alerte et redirige vers la liste des alertes
+  // Crée une alerte avec conversion de la date en UTC
   createAlert(): void {
     if (this.alertForm.valid) {
-      const alert = this.alertForm.value;
-      this.alertService.createAlert(alert).subscribe(
+      const formData = this.alertForm.value;  // Renommé alert en formData
+  
+      // Conversion de la date en fuseau horaire UTC
+      formData.alertDate = this.convertToUTC(formData.alertDate);
+  
+      this.alertService.createAlert(formData).subscribe(
         (response) => {
-          // Redirection vers la page de la liste des alertes
+          this.errorMessage = null;
+          window.alert('Alerte créée avec succès !');  
           this.router.navigate(['/liste-des-alertes']);
         },
         (error) => {
-          this.errorMessage = 'Erreur lors de la création de l\'alerte';
+          this.handleError(error, 'la création de l\'alerte');
         }
       );
     }
+  }
+  
+
+  // Convertit une date locale en format UTC
+  private convertToUTC(localDate: string): string {
+    const date = new Date(localDate);
+    return date.toISOString(); // Convertit en format ISO 8601 UTC
+  }
+
+  // Validateur personnalisé pour vérifier le format de la date
+  private validDateValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    const isValidDate = !isNaN(Date.parse(value));
+    return isValidDate ? null : { invalidDate: true };
+  }
+
+  // Gère les erreurs de manière générique
+  private handleError(error: any, context: string): void {
+    this.errorMessage = `Erreur lors de ${context}. Veuillez réessayer plus tard.`;
+    console.error(`[${context}]`, error);
   }
 }

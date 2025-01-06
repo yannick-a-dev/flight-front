@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FlightService } from '../../services/flight.service';
 import { DatePipe } from '@angular/common';
+import { FlightStatus } from '../../model/flight-status';
 
 @Component({
   selector: 'app-flight-dialog',
@@ -15,7 +16,8 @@ import { DatePipe } from '@angular/common';
 })
 
 export class FlightDialogComponent implements OnInit, AfterViewInit {
-  // Supprimer l'@Input() data pour éviter le conflit
+
+  statusList = Object.values(FlightStatus);
   isEditMode: boolean = false;
   flightForm: FormGroup;
   flight: any;
@@ -37,25 +39,40 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
       this.isEditMode = false;
       this.flight = {}; // Initialisation de flight à un objet vide en mode création
     }
-
+  
     const formattedDepartureTime = this.datePipe.transform(this.data?.departureTime, 'yyyy-MM-dd HH:mm:ss') || '';
     const formattedArrivalTime = this.datePipe.transform(this.data?.arrivalTime, 'yyyy-MM-dd HH:mm:ss') || '';
-
+  
     console.log('Formatted Departure Time:', formattedDepartureTime);
     console.log('Formatted Arrival Time:', formattedArrivalTime);
-
+  
     this.flightForm = this.fb.group({
       flightNumber: [this.data?.flightNumber || '', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
       departureTime: [formattedDepartureTime, Validators.required],
       arrivalTime: [formattedArrivalTime, Validators.required],
       departureAirport: [this.data?.departureAirport || '', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       arrivalAirport: [this.data?.arrivalAirport || '', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      status: [this.data?.status || '', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
+      status: [
+        this.data?.status && this.normalizeStatus(this.data.status) 
+        ? this.normalizeStatus(this.data.status)
+        : FlightStatus.ON_TIME, 
+        [Validators.required]
+      ],
       reservations: this.fb.array(this.data?.reservations || []),
       alerts: this.fb.array(this.data?.alerts || []),
     });
   }
 
+  normalizeStatus(status: string): FlightStatus {
+    const formattedStatus = status.replace(' ', '_').toUpperCase();  
+    if (Object.values(FlightStatus).includes(formattedStatus as FlightStatus)) {
+      return formattedStatus as FlightStatus;  
+    } else {
+      return FlightStatus.ON_TIME;  
+    }
+  }
+  
+  
   onSubmit(): void {
     console.log('Form status:', this.flightForm.status); // Affiche l'état du formulaire
     console.log('Form value:', this.flightForm.value);

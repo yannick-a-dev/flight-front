@@ -4,6 +4,7 @@ import { FlightService } from '../../services/flight.service';
 import { Flight } from '../../model/flight';
 import { MatTableDataSource } from '@angular/material/table';
 import { FlightDialogComponent } from '../flight-dialog/flight-dialog.component';
+import { FlightStatus } from '../../model/flight-status';
 
 @Component({
   selector: 'app-flight',
@@ -16,6 +17,7 @@ import { FlightDialogComponent } from '../flight-dialog/flight-dialog.component'
 export class FlightComponent implements OnInit {
   displayedColumns: string[] = ['flightNumber', 'departureTime', 'arrivalTime', 'status', 'actions'];
   dataSource = new MatTableDataSource<Flight>();
+  statusList = Object.values(FlightStatus);
 
   constructor(private flightService: FlightService, public dialog: MatDialog) {}
 

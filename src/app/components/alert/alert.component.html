@@ -1,38 +1,56 @@
 <div class="container">
   <h2>Alertes</h2>
 
-  <!-- Affichage des erreurs -->
+  <!-- Affichage des erreurs globales -->
   <div *ngIf="errorMessage" class="mat-error">{{ errorMessage }}</div>
 
   <!-- Formulaire pour créer une alerte -->
   <form [formGroup]="alertForm" (ngSubmit)="createAlert()">
+    <!-- Champ pour l'ID du passager -->
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>ID Passager</mat-label>
       <input matInput formControlName="passengerId" />
-      <mat-error *ngIf="alertForm.get('passengerId')?.hasError('required')">ID Passager est requis.</mat-error>
+      <mat-error *ngIf="alertForm.get('passengerId')?.hasError('required')">
+        ID Passager est requis.
+      </mat-error>
     </mat-form-field>
 
+    <!-- Champ pour le numéro de vol -->
     <mat-form-field appearance="fill" class="full-width">
-      <mat-label>ID flight</mat-label>
-      <input matInput formControlName="flightId" />
-      <mat-error *ngIf="alertForm.get('flightId')?.hasError('required')">ID Vol est requis.</mat-error>
+      <mat-label>Flight Number</mat-label>
+      <input matInput formControlName="flightNumber" />
+      <mat-error *ngIf="alertForm.get('flightNumber')?.hasError('required')">
+        Le numéro de vol est requis.
+      </mat-error>
     </mat-form-field>
 
+    <!-- Champ pour la date d'alerte -->
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Date d'Alerte</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="alertDate" />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="alertForm.get('alertDate')?.hasError('required')">Date d'Alerte est requise.</mat-error>
+      <mat-error *ngIf="alertForm.get('alertDate')?.hasError('required')">
+        Date d'Alerte est requise.
+      </mat-error>
+      <mat-error *ngIf="alertForm.get('alertDate')?.hasError('invalidDate')">
+        Date invalide. Veuillez entrer une date correcte.
+      </mat-error>
     </mat-form-field>
 
+    <!-- Champ pour le message -->
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Message</mat-label>
       <textarea matInput formControlName="message"></textarea>
-      <mat-error *ngIf="alertForm.get('message')?.hasError('required')">Le message est requis.</mat-error>
-      <mat-error *ngIf="alertForm.get('message')?.hasError('maxlength')">Le message ne doit pas dépasser 255 caractères.</mat-error>
+      <mat-error *ngIf="alertForm.get('message')?.hasError('required')">
+        Le message est requis.
+      </mat-error>
+      <mat-error *ngIf="alertForm.get('message')?.hasError('maxlength')">
+        Le message ne doit pas dépasser 255 caractères.
+      </mat-error>
     </mat-form-field>
 
+    <!-- Champ pour la sévérité -->
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Sévérité</mat-label>
       <mat-select formControlName="severity">
@@ -41,13 +59,18 @@
         <mat-option value="HIGH">Haute</mat-option>
         <mat-option value="CRITICAL">Critique</mat-option>
       </mat-select>
-      <mat-error *ngIf="alertForm.get('severity')?.hasError('required')">Sévérité est requise.</mat-error>
+      <mat-error *ngIf="alertForm.get('severity')?.hasError('required')">
+        Sévérité est requise.
+      </mat-error>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="!alertForm.valid">Créer alerte</button>
+    <!-- Bouton de soumission -->
+    <button mat-raised-button color="primary" type="submit" [disabled]="!alertForm.valid">
+      Créer alerte
+    </button>
   </form>
-
 </div>
+
 
 
   
