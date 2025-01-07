@@ -6,7 +6,7 @@
     <div class="form-row">
       <mat-form-field appearance="outline">
         <mat-label>Flight Number</mat-label>
-        <input matInput id="flightNumber" formControlName="flightNumber" placeholder="Enter Flight Number" readonly />
+        <input matInput id="flightNumber" formControlName="flightNumber" placeholder="Enter Flight Number" [readonly]="isUpdateMode" />
         <mat-error *ngIf="formControls['flightNumber'].hasError('required') && formControls['flightNumber'].touched">
           Flight number is required.
         </mat-error>

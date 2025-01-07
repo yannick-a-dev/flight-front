@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Flight } from '../../model/flight';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FlightService } from '../../services/flight.service';
@@ -19,6 +18,7 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
 
   statusList = Object.values(FlightStatus);
   isEditMode: boolean = false;
+  isUpdateMode: boolean = false;
   flightForm: FormGroup;
   flight: any;
 
@@ -34,14 +34,16 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if (this.data) {
       this.isEditMode = !!this.data?.flightNumber;
-      this.flight = this.data; // Assurez-vous que 'flight' est bien initialisé
+      this.isUpdateMode = this.isEditMode; 
+      this.flight = this.data; 
     } else {
       this.isEditMode = false;
-      this.flight = {}; // Initialisation de flight à un objet vide en mode création
+      this.isUpdateMode = false; 
+      this.flight = {}; 
     }
   
-    const formattedDepartureTime = this.datePipe.transform(this.data?.departureTime, 'yyyy-MM-dd HH:mm:ss') || '';
-    const formattedArrivalTime = this.datePipe.transform(this.data?.arrivalTime, 'yyyy-MM-dd HH:mm:ss') || '';
+    const formattedDepartureTime = this.datePipe.transform(this.data?.departureTime, 'yyyy-MM-dd\'T\'HH:mm:ss') || '';
+    const formattedArrivalTime = this.datePipe.transform(this.data?.arrivalTime, 'yyyy-MM-dd\'T\'HH:mm:ss') || '';
   
     console.log('Formatted Departure Time:', formattedDepartureTime);
     console.log('Formatted Arrival Time:', formattedArrivalTime);
@@ -62,9 +64,10 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
       alerts: this.fb.array(this.data?.alerts || []),
     });
   }
+  
 
   normalizeStatus(status: string): FlightStatus {
-    const formattedStatus = status.replace(' ', '_').toUpperCase();  
+    const formattedStatus = status.replace(' ', '_').toUpperCase();  // Convertir l'espace en underscore et mettre en majuscule
     if (Object.values(FlightStatus).includes(formattedStatus as FlightStatus)) {
       return formattedStatus as FlightStatus;  
     } else {
@@ -88,14 +91,12 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
     if (this.flightForm.valid) {
       const flightData = this.flightForm.value;
 
-      if (this.isEditMode && this.flight?.flightNumber) { // Vérifier que 'flight' est bien défini
-        // Logique pour la mise à jour du vol
+      if (this.isEditMode && this.flight?.flightNumber) { 
         this.flightService.updateFlight(this.flight.flightNumber, flightData).subscribe(response => {
           this.dialogRef.close(response);
           this.router.navigate(['home/flights']);
         });
       } else {
-        // Logique pour la création d'un nouveau vol
         this.flightService.createFlight(flightData).subscribe(response => {
           this.dialogRef.close(response);
           this.router.navigate(['home/flights']);
@@ -120,19 +121,14 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // Ajout de l'écouteur d'événement 'wheel' avec passive: true
-    const element = document.getElementById('yourElementId'); // Remplacez par l'ID approprié
+    const element = document.getElementById('yourElementId'); 
     if (element) {
       element.addEventListener('wheel', this.onWheelEvent, { passive: true });
     }
   }
-
-  // Accesseurs aux contrôles du formulaire
   get formControls() {
     return this.flightForm.controls;
   }
-
-  // Accesseurs aux réservations et alertes
   get reservations(): FormArray {
     return this.flightForm.get('reservations') as FormArray;
   }
@@ -140,8 +136,6 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
   get alerts(): FormArray {
     return this.flightForm.get('alerts') as FormArray;
   }
-
-  // Méthodes pour ajouter des réservations et alertes
   addReservation(): void {
     this.reservations.push(this.fb.group({
       reservationDate: ['', Validators.required],
@@ -162,7 +156,6 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
     }));
   }
 
-  // Supprimer une réservation ou alerte
   removeReservation(index: number): void {
     this.reservations.removeAt(index);
   }
@@ -171,8 +164,11 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
     this.alerts.removeAt(index);
   }
 
-  // Méthode de gestion de l'événement 'wheel'
   onWheelEvent(event: WheelEvent): void {
     console.log('Wheel event triggered', event);
+  }
+
+  setMode(isUpdate: boolean) {
+    this.isUpdateMode = isUpdate;
   }
 }
