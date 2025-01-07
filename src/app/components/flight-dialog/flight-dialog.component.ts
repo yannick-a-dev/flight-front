@@ -34,10 +34,10 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if (this.data) {
       this.isEditMode = !!this.data?.flightNumber;
-      this.flight = this.data; // Assurez-vous que 'flight' est bien initialisé
+      this.flight = this.data; 
     } else {
       this.isEditMode = false;
-      this.flight = {}; // Initialisation de flight à un objet vide en mode création
+      this.flight = {};
     }
   
     const formattedDepartureTime = this.datePipe.transform(this.data?.departureTime, 'yyyy-MM-dd HH:mm:ss') || '';
