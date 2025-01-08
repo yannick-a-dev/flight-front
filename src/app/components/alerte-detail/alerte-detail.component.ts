@@ -21,9 +21,9 @@ export class AlerteDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const alertId = +this.route.snapshot.paramMap.get('id')!; // Récupérer l'ID de l'alerte depuis l'URL
+    const alertId = +this.route.snapshot.paramMap.get('id')!; 
     if (alertId) {
-      this.getAlertDetails(alertId);  // Appeler la méthode pour récupérer les détails de l'alerte
+      this.getAlertDetails(alertId);  
     }
   }
 
@@ -34,8 +34,8 @@ export class AlerteDetailComponent implements OnInit {
   getAlertDetails(alertId: number): void {
     this.alertService.getAlertById(alertId).subscribe(
       (data) => {
-        this.alertDetails = data;  // Mettre à jour les détails de l'alerte
-        this.errorMessage = null;  // Réinitialiser le message d'erreur
+        this.alertDetails = data; 
+        this.errorMessage = null;  
       },
       (error) => {
         this.errorMessage = 'Erreur lors du chargement des détails de l\'alerte.';
@@ -48,6 +48,6 @@ export class AlerteDetailComponent implements OnInit {
    * Retourner à la liste des alertes.
    */
   goBack(): void {
-    this.router.navigate(['/alert-list']);  // Rediriger vers la liste des alertes
+    this.router.navigate(['/alert-list']);  
   }
 }

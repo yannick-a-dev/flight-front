@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+//import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './auth/auth.guard';
 import { UpdatePassengerComponent } from './components/update-passenger/update-passenger.component';
 import { AlertsComponent } from './components/alert/alert.component';
@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'update-passenger/:id', component: UpdatePassengerComponent },
   { path: 'home/flights', component: FlightComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  //{ path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'alerts', component: AlertsComponent, canActivate: [AuthGuard] },
   { path: 'alert-list', component: AlertListComponent, canActivate: [AuthGuard] },
   { path: 'liste-des-alertes', component: AlertListComponent }, 

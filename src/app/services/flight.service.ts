@@ -30,8 +30,8 @@ export class FlightService {
   }
 
   // Supprimer un vol
-  deleteFlight(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  deleteFlight(flightNumber: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${flightNumber}`);
   }
   getFlightsByPassenger(passengerId: number): Observable<Flight[]> {
     return this.http.get<Flight[]>(`${this.passengerUrl}/${passengerId}/flights`);

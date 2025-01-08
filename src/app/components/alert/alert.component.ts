@@ -29,8 +29,8 @@ export class AlertsComponent implements OnInit {
     this.alertForm = this.fb.group({
       passengerId: ['', Validators.required],
       flightNumber: ['', Validators.required],
-      alertDate: ['', [Validators.required, this.validDateValidator]], // Validation de la date
-      message: ['', [Validators.required, Validators.maxLength(255)]],
+      alertDate: ['', [Validators.required, this.validDateValidator]], 
+      message: ['', [Validators.required, Validators.maxLength(200)]],
       severity: ['', Validators.required],
     });
   }

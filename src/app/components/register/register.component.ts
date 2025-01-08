@@ -28,10 +28,17 @@ export class RegisterComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onRegister(): void {
+    if (!this.passenger.email || !this.passenger.firstName || !this.passenger.lastName || !this.passenger.password || !this.confirmPassword) {
+      this.errorMessage = 'All fields are required.';
+      return;
+    }
+  
     if (this.passenger.password !== this.confirmPassword) {
       this.errorMessage = 'Passwords do not match';
       return;
     }
+  
+    // Proceed with registration
     this.authService.register(this.passenger).subscribe({
       next: () => {
         this.successMessage = 'Registration successful!';
@@ -42,4 +49,5 @@ export class RegisterComponent {
       },
     });
   }
+  
 }

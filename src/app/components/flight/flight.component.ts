@@ -57,11 +57,19 @@ export class FlightComponent implements OnInit {
   }
   
   // Supprimer un vol
-  deleteFlight(id: number): void {
-    if (confirm('Êtes-vous sûr de vouloir supprimer ce vol?')) {
-      this.flightService.deleteFlight(id).subscribe(() => {
-        this.loadFlights(); // Rafraîchir la liste après suppression
-      });
-    }
+// Supprimer un vol
+deleteFlight(flightNumber: string): void {
+  console.log('ID du vol à supprimer:', flightNumber); 
+  if (confirm('Êtes-vous sûr de vouloir supprimer ce vol?')) {
+    this.flightService.deleteFlight(flightNumber).subscribe(
+      () => {
+        this.loadFlights();
+      },
+      (error) => {
+        console.error('Erreur lors de la suppression du vol', error);
+      }
+    );
   }
+}
+
 }

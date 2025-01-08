@@ -77,7 +77,7 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
   
   
   onSubmit(): void {
-    console.log('Form status:', this.flightForm.status); // Affiche l'état du formulaire
+    console.log('Form status:', this.flightForm.status); 
     console.log('Form value:', this.flightForm.value);
 
     // Affichage de l'état de chaque contrôle

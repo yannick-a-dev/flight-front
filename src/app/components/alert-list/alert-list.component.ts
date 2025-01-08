@@ -12,7 +12,7 @@ import { AlertService } from '../../services/alert.service';
 })
 export class AlertListComponent implements OnInit{
 
-  alerts: Alert[] = []; // Liste des alertes à afficher
+  alerts: Alert[] = []; 
   errorMessage: string | null = null;
 
   constructor(private router: Router, private alertService: AlertService) {}
@@ -38,7 +38,7 @@ export class AlertListComponent implements OnInit{
 
   /**
    * Récupère les alertes pour un passager spécifique.
-   * @param passengerId L'identifiant du passager.
+   * @param passengerId 
    */
   getAlertsForPassenger(passengerId: number): void {
     this.alertService.getAlertsForPassenger(passengerId).subscribe(

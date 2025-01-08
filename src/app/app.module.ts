@@ -24,7 +24,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { AlertsComponent } from './components/alert/alert.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MatSelectModule } from '@angular/material/select';
 import { AlerteDetailComponent } from './components/alerte-detail/alerte-detail.component';
 import { AlertListComponent } from './components/alert-list/alert-list.component';
@@ -43,7 +42,6 @@ import { FlightStatusPipe } from './model/flight-status.pipe';
     HomeComponent,
     UpdatePassengerComponent,
     AlertsComponent,
-    DashboardComponent,
     AlerteDetailComponent,
     AlertListComponent,
     FlightComponent,
