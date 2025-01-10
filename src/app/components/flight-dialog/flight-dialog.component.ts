@@ -1,10 +1,12 @@
 import { AfterViewInit, Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FlightService } from '../../services/flight.service';
 import { DatePipe } from '@angular/common';
 import { FlightStatus } from '../../model/flight-status';
+import { Alert } from '../../model/alert';
+import { Reservation } from '../../model/reservation';
 
 @Component({
   selector: 'app-flight-dialog',
@@ -34,35 +36,64 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if (this.data) {
       this.isEditMode = !!this.data?.flightNumber;
-      this.isUpdateMode = this.isEditMode; 
-      this.flight = this.data; 
+      this.isUpdateMode = this.isEditMode;
+      this.flight = this.data;
     } else {
       this.isEditMode = false;
-      this.isUpdateMode = false; 
-      this.flight = {}; 
+      this.isUpdateMode = false;
+      this.flight = {};
     }
   
-    const formattedDepartureTime = this.datePipe.transform(this.data?.departureTime, 'yyyy-MM-dd\'T\'HH:mm:ss') || '';
-    const formattedArrivalTime = this.datePipe.transform(this.data?.arrivalTime, 'yyyy-MM-dd\'T\'HH:mm:ss') || '';
-  
-    console.log('Formatted Departure Time:', formattedDepartureTime);
-    console.log('Formatted Arrival Time:', formattedArrivalTime);
+    const formattedDepartureTime = this.formatDateISO(this.data?.departureTime);
+    const formattedArrivalTime = this.formatDateISO(this.data?.arrivalTime);
   
     this.flightForm = this.fb.group({
       flightNumber: [this.data?.flightNumber || '', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
       departureTime: [formattedDepartureTime, Validators.required],
       arrivalTime: [formattedArrivalTime, Validators.required],
-      departureAirport: [this.data?.departureAirport || '', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      arrivalAirport: [this.data?.arrivalAirport || '', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      status: [
-        this.data?.status && this.normalizeStatus(this.data.status) 
-        ? this.normalizeStatus(this.data.status)
-        : FlightStatus.ON_TIME, 
-        [Validators.required]
-      ],
-      reservations: this.fb.array(this.data?.reservations || []),
-      alerts: this.fb.array(this.data?.alerts || []),
+      departureAirport: [this.data?.departureAirport || null, Validators.required],
+      arrivalAirport: [this.data?.arrivalAirport || null, Validators.required],
+      status: [this.data?.status && this.normalizeStatus(this.data.status) ? this.normalizeStatus(this.data.status): FlightStatus.ON_TIME, [Validators.required]],
+      reservations: this.fb.array(this.mapReservations(this.data?.reservations || [])),
+      alerts: this.fb.array(this.mapAlerts(this.data?.alerts || [])),
     });
+  }
+  
+  private mapReservations(reservations: Reservation[]): FormGroup[] {
+    return reservations.map(reservation => this.fb.group({
+      id: [reservation.id],
+      reservationDate: [
+        this.formatDateISO(reservation.reservationDate), 
+        Validators.required
+      ],
+      seatNumber: [reservation.seatNumber, [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
+      price: [reservation.price, [Validators.required, Validators.min(0)]],
+      passengerId: [reservation.passengerId, Validators.required],
+      flightId: [reservation.flightId, Validators.required],
+    }));
+  }
+  
+  private mapAlerts(alerts: Alert[]): FormGroup[] {
+    return alerts.map(alert => this.fb.group({
+      id: [alert.id],
+      message: [alert.message, [Validators.required, Validators.maxLength(255)]],
+      alertDate: [alert.alertDate, Validators.required],
+      severity: [alert.severity, [Validators.required, this.validateSeverity]],
+      passengerId: [alert.passengerId, Validators.required],
+      flightId: [alert.flightId, Validators.required],
+    }));
+  }
+  
+  private formatDateISO(date: string | Date | null): string {
+    if (!date) return '';
+    return typeof date === 'string' && date.includes('T') 
+      ? date 
+      : this.datePipe.transform(date, 'yyyy-MM-dd\'T\'HH:mm:ss') || '';
+  }
+  
+  private validateSeverity(control: AbstractControl): ValidationErrors | null {
+    const allowedValues = ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'];
+    return allowedValues.includes(control.value) ? null : { invalidSeverity: true };
   }
   
 

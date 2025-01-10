@@ -4,7 +4,7 @@ import { PassengerService } from '../../services/passenger.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdatePassengerComponent } from '../update-passenger/update-passenger.component';
-import { Passenger } from '../../model/model';
+import { Passenger } from '../../model/passenger';
 
 @Component({
   selector: 'app-home',

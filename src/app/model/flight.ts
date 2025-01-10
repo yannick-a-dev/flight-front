@@ -1,3 +1,4 @@
+import { Airport } from "./airport";
 import { FlightStatus } from "./flight-status";
 import { Reservation } from "./reservation";
 
@@ -6,8 +7,8 @@ export interface Flight {
     flightNumber: string;
     departureTime: string;  
     arrivalTime: string;    
-    departureAirport: string;
-    arrivalAirport: string;
+    departureFlightIds?: string[];  
+    arrivalFlightIds?: string[]; 
     status: FlightStatus;
     reservations: Reservation[]; 
 }

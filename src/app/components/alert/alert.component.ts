@@ -3,7 +3,7 @@ import { Alert } from '../../model/alert';
 import { AlertService } from '../../services/alert.service';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Passenger } from '../../model/model';
+import { Passenger } from '../../model/passenger';
 import { PassengerService } from '../../services/passenger.service';
 
 @Component({
