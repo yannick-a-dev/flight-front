@@ -33,8 +33,10 @@ export class AirportEditComponent implements OnInit {
       capacity: ['', [Validators.required, Validators.min(1)]],
       international: [false],
       isActive: [true],
-      terminalInfo: [''],
-      timezone: ['']
+      terminalInfo: ['', Validators.required],
+      timezone: ['', Validators.required],
+      location: ['', Validators.required],  
+      code: ['', Validators.required] 
     });
 
     if (this.editMode) {

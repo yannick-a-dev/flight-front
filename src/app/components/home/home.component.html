@@ -3,59 +3,59 @@
     <mat-card-title>Passenger List</mat-card-title>
     <div class="button-container">
       <button mat-raised-button [routerLink]="['flights']" class="view-flights-button">Consulter les vols</button>
-      <button mat-raised-button [routerLink]="['airports']" class="view-airports-button">Consulter les Aéroports</button>
+      <button mat-raised-button [routerLink]="['airports']" class="view-airports-button">Consulter les
+        Aéroports</button>
     </div>
   </mat-card-header>
-    <mat-card-content>
-      <table mat-table [dataSource]="dataSource">
-        <!-- ID Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> ID </th>
-          <td mat-cell *matCellDef="let passenger"> {{passenger.id}} </td>
-        </ng-container>
-      
-        <!-- First Name Column -->
-        <ng-container matColumnDef="firstName">
-          <th mat-header-cell *matHeaderCellDef> First Name </th>
-          <td mat-cell *matCellDef="let passenger"> {{passenger.firstName}} </td>
-        </ng-container>
-      
-        <!-- Last Name Column -->
-        <ng-container matColumnDef="lastName">
-          <th mat-header-cell *matHeaderCellDef> Last Name </th>
-          <td mat-cell *matCellDef="let passenger"> {{passenger.lastName}} </td>
-        </ng-container>
-      
-        <!-- Email Column -->
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef> Email </th>
-          <td mat-cell *matCellDef="let passenger"> {{passenger.email}} </td>
-        </ng-container>
-      
-        <!-- Phone Column -->
-        <ng-container matColumnDef="phone">
-          <th mat-header-cell *matHeaderCellDef> Phone </th>
-          <td mat-cell *matCellDef="let passenger"> {{passenger.phone}} </td>
-        </ng-container>
-      
-        <!-- Actions Column (for update and delete) -->
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef> Actions </th>
-          <td mat-cell *matCellDef="let passenger">
-            <button mat-button  [routerLink]="['/update-passenger', passenger.id]">Update</button>
-            <button mat-button (click)="deletePassenger(passenger.id)">Delete</button>
-            <button mat-button color="accent" [routerLink]="['/create-alert', passenger.id]">
-              Créer l'alerte
-            </button>
-          </td>
-        </ng-container>
-      
-        <!-- Header Row -->
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        
-        <!-- Data Row -->
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-    </mat-card-content>
-  </mat-card>
-  
+  <mat-card-content>
+    <table mat-table [dataSource]="dataSource">
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let passenger"> {{passenger.id}} </td>
+      </ng-container>
+
+      <!-- First Name Column -->
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> First Name </th>
+        <td mat-cell *matCellDef="let passenger"> {{passenger.firstName}} </td>
+      </ng-container>
+
+      <!-- Last Name Column -->
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef> Last Name </th>
+        <td mat-cell *matCellDef="let passenger"> {{passenger.lastName}} </td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let passenger"> {{passenger.email}} </td>
+      </ng-container>
+
+      <!-- Phone Column -->
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef> Phone </th>
+        <td mat-cell *matCellDef="let passenger"> {{passenger.phone}} </td>
+      </ng-container>
+
+      <!-- Actions Column (for update and delete) -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let passenger">
+          <button mat-button [routerLink]="['/update-passenger', passenger.id]">Update</button>
+          <button mat-button (click)="deletePassenger(passenger.id)">Delete</button>
+          <button mat-button color="accent" [routerLink]="['/create-alert', passenger.id]">
+            Créer l'alerte
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Header Row -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+      <!-- Data Row -->
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>

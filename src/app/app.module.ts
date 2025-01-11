@@ -36,6 +36,7 @@ import { FlightStatusPipe } from './model/flight-status.pipe';
 import { AirportListComponent } from './components/airport-list/airport-list.component';
 import { AirportEditComponent } from './components/airport-edit/airport-edit.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     BrowserAnimationsModule,
     MatSelectModule,
     MatProgressSpinnerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatCheckboxModule
   ],
   providers: [
     provideAnimationsAsync(),

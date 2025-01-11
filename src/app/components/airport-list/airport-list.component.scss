@@ -1,163 +1,175 @@
-/* Container principal */
+
+
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 10px;
-    margin-top: 80px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Titre */
-  h2 {
-    font-size: 26px;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  /* Bouton d'ajout d'aéroport */
-  button.mat-raised-button {
-    background-color: #4caf50;
-    color: #fff;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    transition: background-color 0.3s ease;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  button.mat-raised-button:hover {
-    background-color: #45a049;
-  }
-  
-  /* Tableau des aéroports */
-  .mat-elevation-z8 {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .mat-header-cell {
-    background-color: #f1f1f1;
-    color: #333;
-    font-weight: bold;
-    text-align: center;
-    padding: 10px;
-  }
-  
-  .mat-cell {
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .mat-header-row, .mat-row {
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .mat-cell button {
-    margin-right: 10px;
-    font-size: 14px;
-  }
-  
-  /* Cellules du tableau */
-  .mat-column-id,
-  .mat-column-name,
-  .mat-column-city,
-  .mat-column-country,
-  .mat-column-capacity,
-  .mat-column-actions {
-    text-align: center;
-  }
-  
-  .mat-row:hover {
-    background-color: #f5f5f5;
-  }
-  
-  /* Actions */
-  button.mat-button {
-    background-color: #f5f5f5;
-    color: #333;
-    font-weight: bold;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button.mat-button:hover {
-    background-color: #e0e0e0;
-  }
-  
-  button.mat-button.color-warn {
-    background-color: #f44336;
-    color: #fff;
-  }
-  
-  button.mat-button.color-warn:hover {
-    background-color: #d32f2f;
-  }
-  
-  /* Styles spécifiques pour les erreurs de validation */
-  mat-error {
-    color: #f44336;
-    font-size: 12px;
-    margin-top: 5px;
-  }
-  
-  /* Responsive */
-  @media (max-width: 900px) {
-    .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+  margin-top: 80px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-x: auto; /* Pour la barre de défilement */
+}
+
+.mat-elevation-z8 {
+  width: 100%;
+  display: block;
+}
+
+
+/* Titre */
+h2 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Bouton d'ajout d'aéroport */
+button.mat-raised-button {
+  background-color: #4caf50;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button.mat-raised-button:hover {
+  background-color: #45a049;
+}
+
+/* Tableau des aéroports */
+.mat-elevation-z8 {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.mat-header-cell {
+  background-color: #f1f1f1;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+
+.mat-cell {
+  padding: 10px;
+  text-align: center;
+}
+
+.mat-header-row,
+.mat-row {
+  border-bottom: 1px solid #ddd;
+}
+
+.mat-cell button {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+/* Cellules du tableau */
+.mat-column-id,
+.mat-column-name,
+.mat-column-city,
+.mat-column-country,
+.mat-column-capacity,
+.mat-column-actions {
+  text-align: center;
+}
+
+.mat-row:hover {
+  background-color: #f5f5f5;
+}
+
+/* Actions */
+button.mat-button {
+  background-color: #f5f5f5;
+  color: #333;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.mat-button:hover {
+  background-color: #e0e0e0;
+}
+
+button.mat-button.color-warn {
+  background-color: #f44336;
+  color: #fff;
+}
+
+button.mat-button.color-warn:hover {
+  background-color: #d32f2f;
+}
+
+/* Styles spécifiques pour les erreurs de validation */
+mat-error {
+  color: #f44336;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .container {
       padding: 15px;
-    }
-  
-    h2 {
+      margin-top: 80px; /* Ajusté pour écrans moyens */
+  }
+
+  h2 {
       font-size: 22px;
-    }
-  
-    .mat-header-cell, .mat-cell {
+  }
+
+  .mat-header-cell,
+  .mat-cell {
       padding: 8px;
       font-size: 14px;
-    }
-  
-    button.mat-raised-button {
+  }
+
+  button.mat-raised-button {
       font-size: 14px;
       padding: 8px 16px;
-    }
-  
-    button.mat-button {
+  }
+
+  button.mat-button {
       font-size: 12px;
       padding: 6px 12px;
-    }
   }
-  
-  @media (max-width: 600px) {
-    .container {
+}
+
+@media (max-width: 600px) {
+  .container {
       padding: 10px;
-    }
-  
-    h2 {
+      margin-top: 60px; /* Ajusté pour petits écrans */
+  }
+
+  h2 {
       font-size: 18px;
-    }
-  
-    .mat-header-cell, .mat-cell {
+  }
+
+  .mat-header-cell,
+  .mat-cell {
       padding: 6px;
       font-size: 12px;
-    }
-  
-    button.mat-raised-button {
+  }
+
+  button.mat-raised-button {
       font-size: 12px;
       padding: 6px 12px;
-    }
-  
-    button.mat-button {
+  }
+
+  button.mat-button {
       font-size: 10px;
       padding: 5px 10px;
-    }
   }
-  
+}
