@@ -1,10 +1,13 @@
-export interface Airport {
-    id: number;                 
-    name: string;               
-    location: string;           
-    code: string;       
-    city: string; 
-    country: string;       
-    departureFlightIds?: string[]; 
-    arrivalFlightIds?: string[];  
+export interface AirportDTO {
+  id: number;            
+  name: string;         
+  location: string;      
+  code: string;          
+  capacity: number;      
+  city: string;          
+  country: string;       
+  international: boolean; 
+  isActive: boolean;     
+  terminalInfo: string;  
+  timezone: string;      
   }

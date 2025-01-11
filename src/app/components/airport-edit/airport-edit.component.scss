@@ -1,0 +1,104 @@
+/* Container pour le formulaire */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Titre principal */
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Formulaire */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Champs du formulaire */
+  mat-form-field {
+    width: 100%;
+  }
+  
+  /* Boutons */
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  /* Bouton "Annuler" */
+  button.mat-button {
+    background-color: #f5f5f5;
+    color: #333;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button.mat-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* Bouton "Soumettre" */
+  button.mat-raised-button {
+    background-color: #4caf50;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button.mat-raised-button:disabled {
+    background-color: #9e9e9e;
+  }
+  
+  button.mat-raised-button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Checkbox (international et isActive) */
+  mat-checkbox {
+    margin-left: 10px;
+  }
+  
+  /* Styles spécifiques pour les erreurs de validation */
+  mat-error {
+    color: #f44336;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .container {
+      padding: 10px;
+    }
+  
+    h2 {
+      font-size: 20px;
+    }
+  
+    button.mat-raised-button,
+    button.mat-button {
+      font-size: 14px;
+      padding: 8px 12px;
+    }
+  }
+  

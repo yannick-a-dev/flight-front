@@ -33,6 +33,9 @@ import { FlightDialogComponent } from './components/flight-dialog/flight-dialog.
 import { MatChipsModule } from '@angular/material/chips';
 import { DatePipe } from '@angular/common';
 import { FlightStatusPipe } from './model/flight-status.pipe';
+import { AirportListComponent } from './components/airport-list/airport-list.component';
+import { AirportEditComponent } from './components/airport-edit/airport-edit.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { FlightStatusPipe } from './model/flight-status.pipe';
     AlertListComponent,
     FlightComponent,
     FlightDialogComponent,
-    FlightStatusPipe
+    FlightStatusPipe,
+    AirportListComponent,
+    AirportEditComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -18,10 +18,21 @@ mat-card-header {
   align-items: center;  /* Aligne verticalement le titre et le bouton */
 }
 
-/* Style pour le bouton */
-.view-flights-button {
-  margin-left: 20px;  /* Ajoute un espace entre le bouton et le bord droit */
+.button-container {
+  display: flex;
+  justify-content: flex-end; 
+  gap: 10px; 
 }
+
+.view-flights-button, .view-airports-button {
+  margin-left: 10px;
+}
+
+.view-flights-button:hover, .view-airports-button:hover {
+  background-color: #c3d4d2; 
+  color: white;
+}
+
 
 mat-card-title {
   font-size: 24px;

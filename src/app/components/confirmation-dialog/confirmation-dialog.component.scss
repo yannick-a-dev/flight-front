@@ -1,0 +1,22 @@
+mat-dialog-title {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  mat-dialog-content {
+    font-size: 16px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  mat-dialog-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+  }
+  
+  button {
+    width: 120px;
+  }
+  

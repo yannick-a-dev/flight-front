@@ -1,7 +1,10 @@
 <mat-card class="table-card">
   <mat-card-header class="card-header">
     <mat-card-title>Passenger List</mat-card-title>
-    <button mat-raised-button [routerLink]="['flights']" class="view-flights-button">Consulter les vols</button>
+    <div class="button-container">
+      <button mat-raised-button [routerLink]="['flights']" class="view-flights-button">Consulter les vols</button>
+      <button mat-raised-button [routerLink]="['airports']" class="view-airports-button">Consulter les Aéroports</button>
+    </div>
   </mat-card-header>
     <mat-card-content>
       <table mat-table [dataSource]="dataSource">

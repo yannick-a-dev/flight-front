@@ -1,4 +1,3 @@
-import { Airport } from "./airport";
 import { FlightStatus } from "./flight-status";
 import { Reservation } from "./reservation";
 
