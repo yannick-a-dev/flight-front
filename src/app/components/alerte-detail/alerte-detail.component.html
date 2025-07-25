@@ -11,7 +11,7 @@
       <p><strong>Date de l'alerte:</strong> {{ alertDetails.alertDate | date: 'short' }}</p>
       <p><strong>Message:</strong> {{ alertDetails.message }}</p>
       <p><strong>ID Passager:</strong> {{ alertDetails.passengerId }}</p>
-      <p><strong>ID Vol:</strong> {{ alertDetails.flightId }}</p>
+      <p><strong>ID Vol:</strong> {{ alertDetails.flight.id ?? 'N/A'}}</p>
     </mat-card-content>
 
     <mat-card-actions>

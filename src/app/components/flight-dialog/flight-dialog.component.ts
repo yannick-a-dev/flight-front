@@ -69,7 +69,6 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
       seatNumber: [reservation.seatNumber, [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
       price: [reservation.price, [Validators.required, Validators.min(0)]],
       passengerId: [reservation.passengerId, Validators.required],
-      flightId: [reservation.flightId, Validators.required],
     }));
   }
   
@@ -80,16 +79,18 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
       alertDate: [alert.alertDate, Validators.required],
       severity: [alert.severity, [Validators.required, this.validateSeverity]],
       passengerId: [alert.passengerId, Validators.required],
-      flightId: [alert.flightId, Validators.required],
     }));
   }
   
-  private formatDateISO(date: string | Date | null): string {
-    if (!date) return '';
-    return typeof date === 'string' && date.includes('T') 
-      ? date 
-      : this.datePipe.transform(date, 'yyyy-MM-dd\'T\'HH:mm:ss') || '';
-  }
+private formatDateISO(date: string | Date | null): string {
+  if (!date) return '';
+  
+  let dateObj = typeof date === 'string' ? new Date(date) : date;
+  return this.datePipe.transform(dateObj, 'yyyy-MM-dd\'T\'HH:mm:ss') || '';
+}
+
+
+
   
   private validateSeverity(control: AbstractControl): ValidationErrors | null {
     const allowedValues = ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'];
@@ -106,37 +107,50 @@ export class FlightDialogComponent implements OnInit, AfterViewInit {
     }
   }
   
-  
-  onSubmit(): void {
-    console.log('Form status:', this.flightForm.status); 
-    console.log('Form value:', this.flightForm.value);
+onSubmit(): void {
+  console.log('Form status:', this.flightForm.status); 
+  console.log('Form value:', this.flightForm.value);
 
-    // Affichage de l'état de chaque contrôle
-    for (const controlName in this.flightForm.controls) {
-      if (this.flightForm.controls.hasOwnProperty(controlName)) {
-        const control = this.flightForm.get(controlName);
-        console.log(`Control: ${controlName}, Valid: ${control?.valid}, Errors:`, control?.errors);
-      }
-    }
-
-    if (this.flightForm.valid) {
-      const flightData = this.flightForm.value;
-
-      if (this.isEditMode && this.flight?.flightNumber) { 
-        this.flightService.updateFlight(this.flight.flightNumber, flightData).subscribe(response => {
-          this.dialogRef.close(response);
-          this.router.navigate(['home/flights']);
-        });
-      } else {
-        this.flightService.createFlight(flightData).subscribe(response => {
-          this.dialogRef.close(response);
-          this.router.navigate(['home/flights']);
-        });
-      }
-    } else {
-      console.log("Formulaire invalide");
+  for (const controlName in this.flightForm.controls) {
+    if (this.flightForm.controls.hasOwnProperty(controlName)) {
+      const control = this.flightForm.get(controlName);
+      console.log(`Control: ${controlName}, Valid: ${control?.valid}, Errors:`, control?.errors);
     }
   }
+
+  if (this.flightForm.valid) {
+    const flightData = this.flightForm.value;
+
+    // Reformater les dates si besoin
+    flightData.departureTime = this.formatDateISO(flightData.departureTime);
+    flightData.arrivalTime = this.formatDateISO(flightData.arrivalTime);
+
+    console.log('Payload envoyé au backend :', JSON.stringify(flightData, null, 2));
+
+    const request$ = this.isEditMode && this.flight?.flightNumber
+      ? this.flightService.updateFlight(this.flight.flightNumber, flightData)
+      : this.flightService.createFlight(flightData);
+
+    request$.subscribe({
+      next: response => {
+        this.dialogRef.close(response);
+        this.router.navigate(['home/flights']);
+      },
+      error: err => {
+        console.error('Erreur lors de la requête:', err);
+        if (err.error) {
+          console.error('Détail erreur backend:', err.error);
+          alert('Erreur backend : ' + JSON.stringify(err.error));
+        } else {
+          alert('Erreur inconnue lors de la requête.');
+        }
+      }
+    });
+  } else {
+    console.log("Formulaire invalide");
+  }
+}
+
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data'] && this.data) {
