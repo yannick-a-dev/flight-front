@@ -24,28 +24,17 @@ export class AlertListComponent implements OnInit{
   /**
    * Récupère toutes les alertes disponibles.
    */
-getAllAlerts(): void {
-  this.alertService.getAllAlerts().subscribe(
-    (data) => {
-      // Garder uniquement les alertes "créées" (présentes en base)
-      const validAlerts = data.filter(alert =>
-        alert && alert.id != null && alert.message?.trim()
-      );
-
-      this.alerts = validAlerts;
-
-      const removed = data.length - validAlerts.length;
-      if (removed > 0) {
-        console.warn(`${removed} fausses alertes ignorées`);
+  getAllAlerts(): void {
+    this.alertService.getAllAlerts().subscribe(
+      (data) => {
+        this.alerts = data;
+      },
+      (error) => {
+        this.errorMessage = 'Erreur lors du chargement des alertes.';
+        console.error(error);
       }
-    },
-    (error) => {
-      this.errorMessage = 'Erreur lors du chargement des alertes.';
-      console.error(error);
-    }
-  );
-}
-
+    );
+  }
 
   /**
    * Récupère les alertes pour un passager spécifique.
@@ -55,7 +44,7 @@ getAllAlerts(): void {
     this.alertService.getAlertsForPassenger(passengerId).subscribe(
       (data) => {
         this.alerts = data;
-        this.errorMessage = null; 
+        this.errorMessage = null; // Réinitialiser le message d'erreur
       },
       (error) => {
         this.errorMessage = `Erreur lors de la récupération des alertes pour le passager ${passengerId}.`;
