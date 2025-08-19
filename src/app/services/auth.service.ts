@@ -18,6 +18,12 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.baseUrl}/login`, body);
   }
 
+  verifyOtp(username: string, otp: string): Observable<any> {
+  const body = { username, otp };
+  return this.http.post(`${this.baseUrl}/verifyCode`, body);
+}
+
+
   register(passenger: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/register`, passenger);
   }

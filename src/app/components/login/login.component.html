@@ -1,6 +1,7 @@
 <div class="login-container">
   <h2>Login</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
       <input matInput formControlName="username" placeholder="Enter your username" required>
@@ -17,12 +18,20 @@
       </mat-error>
     </mat-form-field>
 
+    <!-- Champ OTP, affiché uniquement si on est à l'étape OTP -->
+    <mat-form-field appearance="fill" *ngIf="isOtpStep">
+      <mat-label>OTP</mat-label>
+      <input matInput formControlName="otp" placeholder="Enter OTP">
+      <mat-error *ngIf="loginForm.get('otp')?.invalid && loginForm.get('otp')?.touched">
+        OTP is required
+      </mat-error>
+    </mat-form-field>
+
     <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid" class="submit-btn">
-      Login
+      {{ isOtpStep ? 'Verify OTP' : 'Login' }}
     </button>
+
   </form>
   
   <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
 </div>
-
-  
