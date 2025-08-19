@@ -11,6 +11,7 @@ export class FlightService {
 
   private baseUrl = `${environment.apiUrl}/api/flights`;
   private passengerUrl = `${environment.apiUrl}/api/passengers`;
+  getByNumber: any;
 
   constructor(private http: HttpClient) { }
 
@@ -19,15 +20,19 @@ export class FlightService {
     return this.http.get<Flight[]>(this.baseUrl);
   }
 
+  getByFlightNumber(flightNumber: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${flightNumber}`);
+  }
 
   createFlight(flightDto: any): Observable<any> {
     return this.http.post<any>(this.baseUrl, flightDto);
   }
 
   // Mettre à jour un vol
-  updateFlight(id: number, flight: Flight): Observable<Flight> {
-    return this.http.put<Flight>(`${this.baseUrl}/${id}`, flight);
+  updateFlight(flightNumber: string, flight: Flight): Observable<Flight> {
+    return this.http.put<Flight>(`${this.baseUrl}/${flightNumber}`, flight);
   }
+
 
   // Supprimer un vol
   deleteFlight(flightNumber: string): Observable<void> {

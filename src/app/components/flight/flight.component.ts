@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { FlightService } from '../../services/flight.service';
 import { Flight } from '../../model/flight';
 import { MatTableDataSource } from '@angular/material/table';
-import { FlightDialogComponent } from '../flight-dialog/flight-dialog.component';
 import { FlightStatus } from '../../model/flight-status';
+import { FlightDialogComponent } from '../flight-dialog/flight-dialog.component';
 
 @Component({
   selector: 'app-flight',

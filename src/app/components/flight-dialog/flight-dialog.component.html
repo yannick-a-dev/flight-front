@@ -1,169 +1,80 @@
 <div class="flight-form-container">
-  <h2>{{ isEditMode ? 'Update Flight' : 'Create Flight' }}</h2>
-  <form [formGroup]="flightForm" (ngSubmit)="onSubmit()">
+    <h2>{{ isEditMode ? 'Update Flight' : 'Create Flight' }}</h2>
 
-    <!-- Row for Flight Number and Departure Time -->
-    <div class="form-row">
-      <mat-form-field appearance="outline">
-        <mat-label>Flight Number</mat-label>
-        <input matInput id="flightNumber" formControlName="flightNumber" placeholder="Enter Flight Number" [readonly]="isUpdateMode" />
-        <mat-error *ngIf="formControls['flightNumber'].hasError('required') && formControls['flightNumber'].touched">
-          Flight number is required.
-        </mat-error>
-        <mat-error *ngIf="formControls['flightNumber'].hasError('minlength') && formControls['flightNumber'].touched">
-          Flight number must be at least 3 characters long.
-        </mat-error>
-        <mat-error *ngIf="formControls['flightNumber'].hasError('maxlength') && formControls['flightNumber'].touched">
-          Flight number cannot be more than 10 characters.
-        </mat-error>
-      </mat-form-field>
+    <form [formGroup]="flightForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Flight Number</mat-label>
+                <input matInput formControlName="flightNumber" [readonly]="isEditMode" />
+                <mat-error *ngIf="formControls['flightNumber'].hasError('required')">
+                    Required
+                </mat-error>
+            </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Departure Time</mat-label>
-        <input matInput id="departureTime" formControlName="departureTime" type="datetime-local"
-          [value]="datePipe.transform(flightForm.get('departureTime')?.value, 'yyyy-MM-ddTHH:mm:ss')" />
-        <mat-error *ngIf="formControls['departureTime'].hasError('required') && formControls['departureTime'].touched">
-          Departure time is required.
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <!-- Row for Arrival Time and Airports -->
-    <div class="form-row">
-      <mat-form-field appearance="outline">
-        <mat-label>Arrival Time</mat-label>
-        <input matInput id="arrivalTime" formControlName="arrivalTime" type="datetime-local"
-          [value]="datePipe.transform(flightForm.get('arrivalTime')?.value, 'yyyy-MM-ddTHH:mm:ss')" />
-        <mat-error *ngIf="formControls['arrivalTime'].hasError('required') && formControls['arrivalTime'].touched">
-          Arrival time is required.
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Departure Airport</mat-label>
-        <input matInput id="departureAirport" formControlName="departureAirport"
-          placeholder="Enter Departure Airport" />
-        <mat-error
-          *ngIf="formControls['departureAirport'].hasError('required') && formControls['departureAirport'].touched">
-          Departure airport is required.
-        </mat-error>
-        <mat-error
-          *ngIf="formControls['departureAirport'].hasError('minlength') && formControls['departureAirport'].touched">
-          Departure airport must be exactly 3 characters.
-        </mat-error>
-        <mat-error
-          *ngIf="formControls['departureAirport'].hasError('maxlength') && formControls['departureAirport'].touched">
-          Departure airport must be exactly 3 characters.
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <!-- Row for Arrival Airport and Status -->
-    <div class="form-row">
-      <mat-form-field appearance="outline">
-        <mat-label>Arrival Airport</mat-label>
-        <input matInput id="arrivalAirport" formControlName="arrivalAirport" placeholder="Enter Arrival Airport" />
-        <mat-error
-          *ngIf="formControls['arrivalAirport'].hasError('required') && formControls['arrivalAirport'].touched">
-          Arrival airport is required.
-        </mat-error>
-        <mat-error
-          *ngIf="formControls['arrivalAirport'].hasError('minlength') && formControls['arrivalAirport'].touched">
-          Arrival airport must be exactly 3 characters.
-        </mat-error>
-        <mat-error
-          *ngIf="formControls['arrivalAirport'].hasError('maxlength') && formControls['arrivalAirport'].touched">
-          Arrival airport must be exactly 3 characters.
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Status</mat-label>
-        <mat-select formControlName="status" id="status" placeholder="Select Status">
-          <mat-option *ngFor="let status of statusList" [value]="status">
-            {{ status | flightStatus }} 
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="formControls['status'].hasError('required') && formControls['status'].touched">
-          Status is required.
-        </mat-error>
-        <mat-error *ngIf="formControls['status'].hasError('minlength') && formControls['status'].touched">
-          Status must be at least 1 character long.
-        </mat-error>
-        <mat-error *ngIf="formControls['status'].hasError('maxlength') && formControls['status'].touched">
-          Status cannot be more than 50 characters.
-        </mat-error>
-      </mat-form-field>
-      
-    </div>
-
-    <div *ngIf="!isEditMode">
-      <!-- Reservations Section -->
-      <div formArrayName="reservations" class="form-group">
-        <label>Reservations</label>
-        <div *ngFor="let reservation of reservations.controls; let i = index" [formGroupName]="i"
-          class="form-array-item">
-          <mat-form-field appearance="outline">
-            <mat-label>Reservation Date</mat-label>
-            <input matInput formControlName="reservationDate" type="datetime-local" />
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Seat Number</mat-label>
-            <input matInput formControlName="seatNumber" />
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Price</mat-label>
-            <input matInput formControlName="price" type="number" />
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Passenger ID</mat-label>
-            <input matInput formControlName="passengerId" type="number" />
-          </mat-form-field>
-          <button mat-icon-button color="warn" (click)="removeReservation(i)">
-            <mat-icon>delete</mat-icon>
-          </button>
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Departure Time</mat-label>
+                <input matInput formControlName="departureTime" type="datetime-local" />
+                <mat-error *ngIf="formControls['departureTime'].hasError('required')">
+                    Required
+                </mat-error>
+            </mat-form-field>
         </div>
-        <button mat-raised-button color="primary" (click)="addReservation()">Add Reservation</button>
-      </div>
 
-      <!-- Alerts Section -->
-      <div formArrayName="alerts" class="form-group">
-        <label>Alerts</label>
-        <div *ngFor="let alert of alerts.controls; let i = index" [formGroupName]="i" class="form-array-item">
-          <mat-form-field appearance="outline">
-            <mat-label>Alert Message</mat-label>
-            <input matInput formControlName="message" />
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Alert Date</mat-label>
-            <input matInput formControlName="alertDate" type="datetime-local" />
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Severity</mat-label>
-            <mat-select formControlName="severity">
-              <mat-option value="LOW">Low</mat-option>
-              <mat-option value="MEDIUM">Medium</mat-option>
-              <mat-option value="HIGH">High</mat-option>
-              <mat-option value="CRITICAL">Critical</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Passenger ID</mat-label>
-            <input matInput formControlName="passengerId" type="number" />
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Flight ID</mat-label>
-            <input matInput formControlName="flightId" type="number" />
-          </mat-form-field>
-          <button mat-icon-button color="warn" (click)="removeAlert(i)">
-            <mat-icon>delete</mat-icon>
-          </button>
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Arrival Time</mat-label>
+                <input matInput formControlName="arrivalTime" type="datetime-local" />
+                <mat-error *ngIf="formControls['arrivalTime'].hasError('required')">
+                    Required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Departure Airport</mat-label>
+                <input matInput formControlName="departureAirport" />
+                <mat-error *ngIf="formControls['departureAirport'].hasError('required')">
+                    Required
+                </mat-error>
+            </mat-form-field>
         </div>
-        <button mat-raised-button color="primary" (click)="addAlert()">Add Alert</button>
-      </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Arrival Airport</mat-label>
+                <input matInput formControlName="arrivalAirport" />
+                <mat-error *ngIf="formControls['arrivalAirport'].hasError('required')">
+                    Required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="status">
+                    <mat-option *ngFor="let status of statusList" [value]="status">{{ status }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="formControls['status'].hasError('required')">
+                    Required
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-actions">
+            <button mat-raised-button color="accent" type="submit" [disabled]="flightForm.invalid">
+                {{ isEditMode ? 'Edit' : 'Create' }}
+            </button>
+
+            <button mat-raised-button color="warn" type="button" (click)="onClose()">
+                Close
+            </button>
+        </div>
+    </form>
+
+    <div *ngIf="isEditMode" class="extra-actions">
+        <button mat-raised-button color="primary" (click)="goToAddReservation()">
+            Add Reservation
+        </button>
+        <button mat-raised-button color="warn" (click)="goToAddAlert()">
+            Add Alert
+        </button>
     </div>
-    <button mat-raised-button color="accent" type="submit" [disabled]="flightForm.invalid">
-      {{ isEditMode ? 'Edit' : 'Create' }}
-    </button>
-  </form>
 </div>

@@ -29,7 +29,6 @@ import { AlerteDetailComponent } from './components/alerte-detail/alerte-detail.
 import { AlertListComponent } from './components/alert-list/alert-list.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FlightComponent } from './components/flight/flight.component';
-import { FlightDialogComponent } from './components/flight-dialog/flight-dialog.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { DatePipe } from '@angular/common';
 import { FlightStatusPipe } from './model/flight-status.pipe';
@@ -37,6 +36,9 @@ import { AirportListComponent } from './components/airport-list/airport-list.com
 import { AirportEditComponent } from './components/airport-edit/airport-edit.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ReservationFormComponent } from './components/reservation-form/reservation-form.component';
+import { AlertFormComponent } from './components/alert-form/alert-form.component';
+import { FlightDialogComponent } from './components/flight-dialog/flight-dialog.component';
 
 @NgModule({
   declarations: [
@@ -49,11 +51,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     AlerteDetailComponent,
     AlertListComponent,
     FlightComponent,
-    FlightDialogComponent,
     FlightStatusPipe,
     AirportListComponent,
     AirportEditComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ReservationFormComponent,
+    AlertFormComponent,
+    FlightDialogComponent
   ],
   imports: [
     BrowserModule,

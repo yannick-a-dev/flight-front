@@ -11,6 +11,8 @@ import { AlerteDetailComponent } from './components/alerte-detail/alerte-detail.
 import { FlightComponent } from './components/flight/flight.component';
 import { AirportListComponent } from './components/airport-list/airport-list.component';
 import { AirportEditComponent } from './components/airport-edit/airport-edit.component';
+import { AlertFormComponent } from './components/alert-form/alert-form.component';
+import { ReservationFormComponent } from './components/reservation-form/reservation-form.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -26,6 +28,8 @@ const routes: Routes = [
   { path: 'home/airports', component: AirportListComponent},
   { path: 'edit-airport/:id', component: AirportEditComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  {path:  'reservations/add', component:ReservationFormComponent},
+  {path:  'alerts/add', component:AlertFormComponent}
 ];
 
 
