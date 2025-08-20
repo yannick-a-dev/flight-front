@@ -1,27 +1,37 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthResponse } from '../model/authResponse';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private baseUrl = `${environment.apiUrl}/auth`; 
+  private authStatus = new BehaviorSubject<boolean>(this.isAuthenticated());
+  authStatus$ = this.authStatus.asObservable();
 
-  constructor(private http: HttpClient) {}
+  private baseUrl = `${environment.apiUrl}/auth`;
+
+  constructor(private http: HttpClient) { }
 
   login(username: string, password: string): Observable<AuthResponse> {
     const body = { username, password };
     return this.http.post<AuthResponse>(`${this.baseUrl}/login`, body);
   }
 
+   loginSuccess(accessToken: string, refreshToken: string): void {
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+    this.authStatus.next(true); // notifier la connexion
+  }
+
   verifyOtp(username: string, otp: string): Observable<any> {
-  const body = { username, otp };
-  return this.http.post(`${this.baseUrl}/verifyCode`, body);
-}
+    const body = { username, otp };
+    return this.http.post(`${this.baseUrl}/verifyCode`, body);
+  }
 
 
   register(passenger: any): Observable<any> {
@@ -37,10 +47,27 @@ export class AuthService {
     return this.http.get(`${this.baseUrl}/permissions`);
   }
 
+  logout(): void {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    this.authStatus.next(false);
+  }
+
   isAuthenticated(): boolean {
     const token = localStorage.getItem('accessToken');
-    console.log('Checking authentication status, token:', token);
-    return token ? true : false;  // Si le token est présent, l'utilisateur est authentifié
+    if (!token) {
+      return false;
+    }
+
+    try {
+      const decoded: any = jwtDecode(token);
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp && decoded.exp > now; // true si non expiré
+    } catch (e) {
+      console.error('Invalid token', e);
+      return false;
+    }
   }
-  
+
 }
+

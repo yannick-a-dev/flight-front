@@ -68,9 +68,7 @@ onSubmit(): void {
     this.authService.verifyOtp(username, otp).subscribe({
       next: (response: TokenResponse) => {
         console.log('OTP validé:', response);
-        // Sauvegarder les tokens dans le localStorage
-        localStorage.setItem('accessToken', response.accessToken || '');
-        localStorage.setItem('refreshToken', response.refreshToken || '');
+       this.authService.loginSuccess(response.accessToken!, response.refreshToken!);
         // Rediriger vers la page d'accueil
         this.router.navigate(['/home']);
       },

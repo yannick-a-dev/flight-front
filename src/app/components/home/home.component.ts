@@ -79,7 +79,6 @@ export class HomeComponent implements OnInit {
     }
   }
 
-
   createAlert(passenger: Passenger): void {
     this.router.navigate(['/create-alert', passenger.id]);
   }
