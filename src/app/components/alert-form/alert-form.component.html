@@ -1,1 +1,47 @@
-<p>alert-form works!</p>
+<div class="alert-form-container">
+  <h2>Create Alert for Flight {{ flightNumber }}</h2>
+
+  <form [formGroup]="alertForm" (ngSubmit)="onSubmit()">
+    
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Message</mat-label>
+      <textarea matInput rows="3" formControlName="message"></textarea>
+      <mat-error *ngIf="alertForm.get('message')?.hasError('required')">
+        Message is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Alert Date</mat-label>
+      <input matInput type="datetime-local" formControlName="alertDate">
+      <mat-error *ngIf="alertForm.get('alertDate')?.hasError('required')">
+        Alert date is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Severity</mat-label>
+      <mat-select formControlName="severity">
+        <mat-option *ngFor="let level of severities" [value]="level">
+          {{ level }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="alertForm.get('severity')?.hasError('required')">
+        Severity is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Passenger ID</mat-label>
+      <input matInput type="number" formControlName="passengerId">
+      <mat-error *ngIf="alertForm.get('passengerId')?.hasError('required')">
+        Passenger ID is required
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="alertForm.invalid">
+      Create Alert
+    </button>
+  </form>
+</div>
+

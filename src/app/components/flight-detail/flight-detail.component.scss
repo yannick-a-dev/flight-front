@@ -1,0 +1,49 @@
+/* Containers pour les réservations et les alertes */
+.reservations-container,
+.alerts-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;                  /* espace uniforme entre les cartes */
+  justify-content: center;    /* centre les cartes horizontalement */
+  margin-bottom: 1.5rem;
+}
+
+/* Style générique des cartes */
+.reservation-card,
+.alert-card {
+  width: 250px;
+  padding: 0.75rem;
+  text-align: center;
+  border-radius: 8px;          /* coins arrondis */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* ombre douce */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reservation-card:hover,
+.alert-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Variantes des alertes par sévérité */
+.alert-card.info {
+  background-color: #d9edf7;
+  border-left: 5px solid #31708f;
+}
+
+.alert-card.warning {
+  background-color: #fcf8e3;
+  border-left: 5px solid #8a6d3b;
+}
+
+.alert-card.critical {
+  background-color: #f2dede;
+  border-left: 5px solid #a94442;
+}
+
+/* Détails du vol */
+.flight-details {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+

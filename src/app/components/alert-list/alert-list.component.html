@@ -1,35 +1,38 @@
-<div *ngIf="alerts.length > 0" class="alert-container">
+<div *ngIf="validAlerts.length > 0" class="alert-container">
   <h3 class="alert-title">Liste des alertes</h3>
   <mat-list class="alert-list">
-    <mat-list-item *ngFor="let alert of alerts" class="alert-item">
+    <mat-list-item *ngFor="let alert of validAlerts" class="alert-item">
       <button mat-button (click)="viewAlertDetails(alert.id)" class="alert-button">
         <div class="alert-info">
-          <!-- Bloc pour l'icône de sévérité -->
+          <!-- Icônes selon la sévérité -->
           <div class="alert-icon-block">
-            <mat-icon class="alert-icon high-severity" *ngIf="alert.severity === 'HIGH'">warning</mat-icon>
-            <mat-icon class="alert-icon medium-severity" *ngIf="alert.severity === 'MEDIUM'">info</mat-icon>
-            <mat-icon class="alert-icon low-severity" *ngIf="alert.severity === 'LOW'">check_circle</mat-icon>
-            <mat-icon class="alert-icon critical-severity" *ngIf="alert.severity === 'CRITICAL'">priority_high</mat-icon>
+            <mat-icon class="alert-icon high-severity"
+              *ngIf="getSeverityLabel(alert.severity) === 'HIGH'">warning</mat-icon>
+            <mat-icon class="alert-icon medium-severity"
+              *ngIf="getSeverityLabel(alert.severity) === 'MEDIUM'">info</mat-icon>
+            <mat-icon class="alert-icon low-severity"
+              *ngIf="getSeverityLabel(alert.severity) === 'LOW'">check_circle</mat-icon>
+            <mat-icon class="alert-icon critical-severity"
+              *ngIf="getSeverityLabel(alert.severity) === 'CRITICAL'">priority_high</mat-icon>
           </div>
 
-          <!-- Bloc pour la sévérité et le message -->
+          <!-- Texte de l'alerte -->
           <div class="alert-text-block">
-            <span class="alert-severity">{{ alert.severity }}</span>
+            <span class="alert-severity">{{ getSeverityLabel(alert.severity) }}</span>
             <span class="alert-message">{{ alert.message }}</span>
           </div>
 
-          <!-- Bloc pour la date -->
+          <!-- Date -->
           <div class="alert-date-block">
-            <span>Date: {{ alert.alertDate | date: 'short' }}</span>
+            <span>Date: {{ alert.alertDate ? (alert.alertDate | date:'short') : 'N/A' }}</span>
           </div>
-        </div>      
+
+        </div>
       </button>
     </mat-list-item>
   </mat-list>
 </div>
 
-<!-- Message quand aucune alerte n'est disponible -->
-<div *ngIf="alerts.length === 0" class="no-alerts-message">
+<div *ngIf="validAlerts.length === 0" class="no-alerts-message">
   <p>Aucune alerte disponible.</p>
 </div>
-

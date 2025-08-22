@@ -13,24 +13,43 @@ import { AirportListComponent } from './components/airport-list/airport-list.com
 import { AirportEditComponent } from './components/airport-edit/airport-edit.component';
 import { AlertFormComponent } from './components/alert-form/alert-form.component';
 import { ReservationFormComponent } from './components/reservation-form/reservation-form.component';
+import { FlightDetailComponent } from './components/flight-detail/flight-detail.component';
+
 
 const routes: Routes = [
+  // Auth
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+
+  // Home
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+
+  // Passagers
   { path: 'update-passenger/:id', component: UpdatePassengerComponent },
+
+  // Vols
   { path: 'home/flights', component: FlightComponent },
+  { path: 'home/flights/:flightNumber', component: FlightDetailComponent },
+  { path: 'flights/:flightNumber/reservations/new', component: ReservationFormComponent },
+  { path: 'flights/:flightNumber/alerts/new', component: AlertFormComponent },
+
+  // Réservations
+  { path: 'reservations/add', component: ReservationFormComponent },
+
+  // Alertes
   { path: 'alerts', component: AlertsComponent, canActivate: [AuthGuard] },
-  { path: 'alert-list', component: AlertListComponent, canActivate: [AuthGuard] },
-  { path: 'liste-des-alertes', component: AlertListComponent }, 
+  { path: 'alerts/add', component: AlertFormComponent },
   { path: 'create-alert/:id', component: AlertsComponent },
   { path: 'alerte-detail/:id', component: AlerteDetailComponent },
-  { path: 'home/airports', component: AirportListComponent},
+  { path: 'alert-list', component: AlertListComponent, canActivate: [AuthGuard] },
+  { path: 'liste-des-alertes', component: AlertListComponent },
+
+  // Aéroports
+  { path: 'home/airports', component: AirportListComponent },
   { path: 'edit-airport/:id', component: AirportEditComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  {path:  'reservations/add', component:ReservationFormComponent},
-  {path:  'alerts/add', component:AlertFormComponent}
 ];
+
 
 
 @NgModule({

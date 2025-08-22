@@ -1,0 +1,37 @@
+<h2 style="text-align: center;">Détails du vol {{ flightNumber }}</h2>
+
+<!-- Vérification que flight est chargé -->
+<div *ngIf="flight; else loading" class="flight-details">
+  <p>Départ: {{ flight.departureAirport }} à {{ flight.departureTime | date:'short' }}</p>
+  <p>Arrivée: {{ flight.arrivalAirport }} à {{ flight.arrivalTime | date:'short' }}</p>
+  <p>Status: {{ flight.status }}</p>
+</div>
+
+<ng-template #loading>
+  <p style="text-align: center;">Chargement du vol...</p>
+</ng-template>
+
+<h3 style="text-align: center;">Réservations</h3>
+<div class="reservations-container">
+  <mat-card *ngFor="let r of reservations" class="reservation-card">
+    <mat-card-content style="text-align: center;">
+      <p><strong>IdPassenger:</strong> {{ r.passengerId }}</p>
+      <p><strong>SeatNumber:</strong> {{ r.seatNumber }}</p>
+      <p><strong>Price:</strong> {{ r.price | currency:'EUR' }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<h3 style="text-align: center;">Alertes</h3>
+<div class="alerts-container">
+  <mat-card *ngFor="let a of validAlerts"
+            class="alert-card"
+            [ngClass]="a.severity.toLowerCase()">
+    <mat-card-content style="text-align: center;">
+      <p><strong>Message:</strong> {{ a.message }}</p>
+      <p><strong>Severity:</strong> {{ a.severity }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+

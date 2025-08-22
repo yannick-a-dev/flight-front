@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FlightService } from '../../services/flight.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-flight-dialog',
@@ -14,11 +15,13 @@ export class FlightDialogComponent {
   flightForm!: FormGroup;
   isEditMode = false;
   flightId!: number;
+  flightNumber!: string;
   statusList = ['ON_TIME', 'CANCELLED', 'DELAYED', 'BOARDING', 'LANDED'];
 
   constructor(
     private flightService: FlightService,
     private fb: FormBuilder,
+    private router: Router,
     private dialogRef: MatDialogRef<FlightDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -29,8 +32,8 @@ export class FlightDialogComponent {
 
   ngOnInit(): void {
     // Vérifie si on est en mode édition
-    const flightNumber = this.data?.flightNumber; // récupéré depuis le dialog ouvert
-    this.isEditMode = !!flightNumber;
+    this.flightNumber = this.data?.flightNumber;
+    this.isEditMode = !!this.flightNumber;
 
     // Initialise le formulaire
     this.flightForm = this.fb.group({
@@ -44,7 +47,7 @@ export class FlightDialogComponent {
 
     // Si édition, charge les données existantes
     if (this.isEditMode) {
-      this.flightService.getByFlightNumber(flightNumber).subscribe((data: { flightNumber: any; departureTime: string; arrivalTime: string; departureAirport: any; arrivalAirport: any; status: any; }) => {
+      this.flightService.getByFlightNumber(this.flightNumber).subscribe((data: { flightNumber: any; departureTime: string; arrivalTime: string; departureAirport: any; arrivalAirport: any; status: any; }) => {
         this.flightForm.patchValue({
           flightNumber: data.flightNumber,
           departureTime: this.formatDateForInput(data.departureTime),
@@ -104,16 +107,16 @@ export class FlightDialogComponent {
   }
 
 
-  // Optionnel: boutons supplémentaires en mode édition
   goToAddReservation() {
-    console.log('Naviguer vers création de réservation pour le vol', this.flightId);
+    this.router.navigate([`/flights/${this.flightNumber}/reservations/new`]).then(() => this.dialogRef.close());
   }
 
   goToAddAlert() {
-    console.log('Naviguer vers création d\'alerte pour le vol', this.flightId);
+    this.dialogRef.close();
+    this.router.navigate([`/flights/${this.flightNumber}/alerts/new`]).then(() => this.dialogRef.close());
   }
 
   onClose() {
-    this.dialogRef.close(false); // false = annulation
+    this.dialogRef.close(false);
   }
 }

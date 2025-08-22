@@ -39,6 +39,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReservationFormComponent } from './components/reservation-form/reservation-form.component';
 import { AlertFormComponent } from './components/alert-form/alert-form.component';
 import { FlightDialogComponent } from './components/flight-dialog/flight-dialog.component';
+import { FlightDetailComponent } from './components/flight-detail/flight-detail.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { FlightDialogComponent } from './components/flight-dialog/flight-dialog.
     ConfirmationDialogComponent,
     ReservationFormComponent,
     AlertFormComponent,
-    FlightDialogComponent
+    FlightDialogComponent,
+    FlightDetailComponent
   ],
   imports: [
     BrowserModule,

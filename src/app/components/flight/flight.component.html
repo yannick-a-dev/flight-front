@@ -29,7 +29,7 @@
         <th mat-header-cell *matHeaderCellDef>Status</th>
         <td mat-cell *matCellDef="let flight">{{ flight.status | flightStatus }}</td>
       </ng-container>
-     
+
       <!-- Actions -->
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
@@ -39,6 +39,10 @@
           </button>
           <button mat-icon-button color="warn" (click)="deleteFlight(flight.flightNumber)" aria-label="Delete flight">
             <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" (click)="goToFlightDetail(flight.flightNumber)"
+            aria-label="View flight details">
+            <mat-icon>visibility</mat-icon>
           </button>
         </td>
       </ng-container>

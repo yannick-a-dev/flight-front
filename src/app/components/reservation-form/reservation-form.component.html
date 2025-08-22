@@ -1,1 +1,43 @@
-<p>reservation-form works!</p>
+<div class="reservation-card">
+  <h2>Create Reservation for Flight {{ flightNumber }}</h2>
+
+  <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Reservation Date</mat-label>
+      <input matInput formControlName="reservationDate" type="datetime-local">
+      <mat-error *ngIf="reservationForm.get('reservationDate')?.hasError('required')">
+        Required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Seat Number</mat-label>
+      <input matInput formControlName="seatNumber">
+      <mat-error *ngIf="reservationForm.get('seatNumber')?.hasError('required')">
+        Required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Price</mat-label>
+      <input matInput type="number" formControlName="price">
+      <mat-error *ngIf="reservationForm.get('price')?.hasError('required')">
+        Required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Passenger ID</mat-label>
+      <input matInput type="number" formControlName="passengerId">
+      <mat-error *ngIf="reservationForm.get('passengerId')?.hasError('required')">
+        Required
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="reservationForm.invalid">
+        Create Reservation
+      </button>
+    </div>
+  </form>
+</div>

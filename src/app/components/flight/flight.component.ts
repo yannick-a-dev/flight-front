@@ -5,11 +5,12 @@ import { Flight } from '../../model/flight';
 import { MatTableDataSource } from '@angular/material/table';
 import { FlightStatus } from '../../model/flight-status';
 import { FlightDialogComponent } from '../flight-dialog/flight-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-flight',
   standalone: false,
-  
+
   templateUrl: './flight.component.html',
   styleUrl: './flight.component.scss'
 })
@@ -19,7 +20,7 @@ export class FlightComponent implements OnInit {
   dataSource = new MatTableDataSource<Flight>();
   statusList = Object.values(FlightStatus);
 
-  constructor(private flightService: FlightService, public dialog: MatDialog) {}
+  constructor(private flightService: FlightService, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
     this.loadFlights();
@@ -34,42 +35,45 @@ export class FlightComponent implements OnInit {
 
   openEditDialog(flight: Flight): void {
     const dialogRef = this.dialog.open(FlightDialogComponent, {
-      data: flight,  
+      data: flight,
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.loadFlights();  
+        this.loadFlights();
       }
     });
   }
-  
+
   openDialog(): void {
     const dialogRef = this.dialog.open(FlightDialogComponent, {
-      data: null,  
+      data: null,
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.loadFlights(); 
+        this.loadFlights();
       }
     });
   }
-  
-  // Supprimer un vol
-// Supprimer un vol
-deleteFlight(flightNumber: string): void {
-  console.log('ID du vol à supprimer:', flightNumber); 
-  if (confirm('Êtes-vous sûr de vouloir supprimer ce vol?')) {
-    this.flightService.deleteFlight(flightNumber).subscribe(
-      () => {
-        this.loadFlights();
-      },
-      (error) => {
-        console.error('Erreur lors de la suppression du vol', error);
-      }
-    );
-  }
-}
 
+  // Supprimer un vol
+  // Supprimer un vol
+  deleteFlight(flightNumber: string): void {
+    console.log('ID du vol à supprimer:', flightNumber);
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce vol?')) {
+      this.flightService.deleteFlight(flightNumber).subscribe(
+        () => {
+          this.loadFlights();
+        },
+        (error) => {
+          console.error('Erreur lors de la suppression du vol', error);
+        }
+      );
+    }
+  }
+
+  goToFlightDetail(flightNumber: string) {
+    this.router.navigate([`/home/flights/${flightNumber}`]);
+  }
 }
