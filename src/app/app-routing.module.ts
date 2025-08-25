@@ -31,6 +31,7 @@ const routes: Routes = [
   // Vols
   { path: 'home/flights', component: FlightComponent },
   { path: 'home/flights/:flightNumber', component: FlightDetailComponent },
+  { path: 'flights/:flightNumber/alerts', component: AlertListComponent },
   { path: 'flights/:flightNumber/reservations/new', component: ReservationFormComponent },
   { path: 'flights/:flightNumber/alerts/new', component: AlertFormComponent },
 
