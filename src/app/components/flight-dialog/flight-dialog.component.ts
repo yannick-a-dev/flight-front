@@ -77,27 +77,21 @@ export class FlightDialogComponent {
 
     const formValue = this.flightForm.value;
 
-    // Préparer les données du vol
     const flightData = {
       ...formValue,
-      departureTime: new Date(formValue.departureTime).toISOString().slice(0, 19),
-      arrivalTime: new Date(formValue.arrivalTime).toISOString().slice(0, 19),
-      reservations: [],  // ou garder celles existantes si nécessaire
-      alerts: []         // ou garder celles existantes si nécessaire
+      departureTime: new Date(formValue.departureTime).toISOString(),
+      arrivalTime: new Date(formValue.arrivalTime).toISOString(),
+      reservations: [],
+      alerts: []
     };
 
     if (this.isEditMode) {
-      // Récupérer le flightNumber depuis le formulaire
-      const flightNumber = this.flightForm.get('flightNumber')?.value;
-
-      // Mettre à jour le vol via le service
-      this.flightService.updateFlight(flightNumber, flightData)
+      this.flightService.updateFlight(this.flightNumber, flightData)
         .subscribe({
           next: () => this.dialogRef.close(true),
           error: (err) => console.error('Erreur lors de la mise à jour:', err)
         });
     } else {
-      // Créer un nouveau vol
       this.flightService.createFlight(flightData)
         .subscribe({
           next: () => this.dialogRef.close(true),
@@ -105,6 +99,7 @@ export class FlightDialogComponent {
         });
     }
   }
+
 
 
   goToAddReservation() {
