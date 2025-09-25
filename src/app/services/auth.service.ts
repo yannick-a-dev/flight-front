@@ -47,6 +47,15 @@ export class AuthService {
     return this.http.get(`${this.baseUrl}/permissions`);
   }
 
+  
+  forgotPassword(email: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/forgot-password?email=${email}`, {});
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/reset-password?token=${token}&newPassword=${newPassword}`, {});
+  }
+
   logout(): void {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');

@@ -7,8 +7,10 @@
         Aéroports</button>
     </div>
   </mat-card-header>
+
   <mat-card-content>
-    <table mat-table [dataSource]="dataSource">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-width">
+
       <!-- ID Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> ID </th>
@@ -39,21 +41,35 @@
         <td mat-cell *matCellDef="let passenger"> {{passenger.phone}} </td>
       </ng-container>
 
-      <!-- Actions Column (for update and delete) -->
+      <!-- Flights Column -->
+      <ng-container matColumnDef="flights">
+        <th mat-header-cell *matHeaderCellDef> Flights </th>
+        <td mat-cell *matCellDef="let passenger">
+          <ng-container *ngIf="passenger.flightNumbers?.length > 0; else noFlights">
+            <div *ngFor="let flight of passenger.flightNumbers" style="margin-bottom: 4px;">
+              <button mat-button color="accent" [routerLink]="['/flights', flight, 'alerts', 'new']"
+                [queryParams]="{ passengerId: passenger.id }">
+                Créer alerte ({{ flight }})
+              </button>
+            </div>
+          </ng-container>
+          <ng-template #noFlights>
+            Aucun vol
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <!-- Actions Column -->
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let passenger">
           <button mat-button [routerLink]="['/update-passenger', passenger.id]">Update</button>
           <button mat-button (click)="deletePassenger(passenger.id)">Delete</button>
-          <button mat-button color="accent" [routerLink]="['/create-alert', passenger.id]">
-            Créer l'alerte
-          </button>
         </td>
       </ng-container>
 
       <!-- Header Row -->
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-
       <!-- Data Row -->
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>

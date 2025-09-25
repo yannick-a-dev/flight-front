@@ -29,6 +29,15 @@ export class AppComponent {
     });
   }
 
+   get isRegisterPage(): boolean {
+    return this.router.url === '/register';
+  }
+
+  
+  get isLoginPage(): boolean {
+    return this.router.url === '/login';
+  }
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);

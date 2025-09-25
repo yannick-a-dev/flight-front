@@ -73,33 +73,39 @@ export class FlightDialogComponent {
   }
 
   onSubmit(): void {
-    if (this.flightForm.invalid) return;
+  if (this.flightForm.invalid) return;
 
-    const formValue = this.flightForm.value;
+  const formValue = this.flightForm.value;
 
-    const flightData = {
-      ...formValue,
-      departureTime: new Date(formValue.departureTime).toISOString(),
-      arrivalTime: new Date(formValue.arrivalTime).toISOString(),
-      reservations: [],
-      alerts: []
-    };
+  // Convertir les dates en LocalDateTime compatible (sans timezone)
+  const departureTime = new Date(formValue.departureTime).toISOString().slice(0, 19);
+  const arrivalTime = new Date(formValue.arrivalTime).toISOString().slice(0, 19);
 
-    if (this.isEditMode) {
-      this.flightService.updateFlight(this.flightNumber, flightData)
-        .subscribe({
-          next: () => this.dialogRef.close(true),
-          error: (err) => console.error('Erreur lors de la mise à jour:', err)
-        });
-    } else {
-      this.flightService.createFlight(flightData)
-        .subscribe({
-          next: () => this.dialogRef.close(true),
-          error: (err) => console.error('Erreur lors de la création:', err)
-        });
-    }
+  const flightData = {
+    flightNumber: formValue.flightNumber,
+    departureTime: departureTime,
+    arrivalTime: arrivalTime,
+    departureAirport: formValue.departureAirport.toUpperCase(),
+    arrivalAirport: formValue.arrivalAirport.toUpperCase(),
+    status: formValue.status || 'SCHEDULED',  
+    reservations: [], 
+    alerts: []        
+  };
+
+  if (this.isEditMode) {
+    this.flightService.updateFlight(this.flightNumber, flightData)
+      .subscribe({
+        next: () => this.dialogRef.close(true),
+        error: (err) => console.error('Erreur lors de la mise à jour:', err)
+      });
+  } else {
+    this.flightService.createFlight(flightData)
+      .subscribe({
+        next: () => this.dialogRef.close(true),
+        error: (err) => console.error('Erreur lors de la création:', err)
+      });
   }
-
+}
 
 
   goToAddReservation() {

@@ -18,9 +18,38 @@
 h2 {
   font-size: 26px;
   font-weight: 600;
-  margin-bottom: 28px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   color: #222;
 }
+
+.extra-links {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;   
+  align-items: center;      
+  gap: 12px;              
+
+  button {
+    font-size: 14px;
+    text-transform: none;
+    padding: 6px 16px;
+    border-radius: 8px;
+    width: 220px;           
+    max-width: 90%;        
+  }
+
+  button[routerLink="/register"] {
+    background-color: #4caf50;
+    color: white;
+    font-weight: 500;
+
+    &:hover {
+      background-color: #43a047;
+    }
+  }
+}
+
 
 mat-form-field {
   width: 100%;
@@ -34,7 +63,6 @@ mat-form-field mat-label {
 
 input {
   font-size: 15px;
-  padding: 14px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 

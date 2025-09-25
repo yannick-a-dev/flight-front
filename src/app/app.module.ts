@@ -40,6 +40,9 @@ import { ReservationFormComponent } from './components/reservation-form/reservat
 import { AlertFormComponent } from './components/alert-form/alert-form.component';
 import { FlightDialogComponent } from './components/flight-dialog/flight-dialog.component';
 import { FlightDetailComponent } from './components/flight-detail/flight-detail.component';
+import { SimpleAlertDialogComponent } from './components/simple-alert-dialog/simple-alert-dialog.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,10 @@ import { FlightDetailComponent } from './components/flight-detail/flight-detail.
     ReservationFormComponent,
     AlertFormComponent,
     FlightDialogComponent,
-    FlightDetailComponent
+    FlightDetailComponent,
+    SimpleAlertDialogComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

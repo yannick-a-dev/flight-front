@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdatePassengerComponent } from '../update-passenger/update-passenger.component';
 import { Passenger } from '../../model/passenger';
+import { Reservation } from '../../model/reservation';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ import { Passenger } from '../../model/passenger';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'phone', 'actions'];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'phone', 'flights', 'actions'];
   dataSource: MatTableDataSource<Passenger> = new MatTableDataSource<Passenger>();
 
   constructor(
@@ -35,16 +36,15 @@ export class HomeComponent implements OnInit {
         );
 
         console.log('Passagers valides chargés:', validPassengers);
-        const removed = data.length - validPassengers.length;
-        if (removed > 0) {
-          console.warn(`${removed} passager(s) invalides supprimés`);
-        }
+
+        // S'assurer que flightNumbers est défini
+        validPassengers.forEach(p => {
+          p.flightNumbers = p.flightNumbers || [];
+        });
 
         this.dataSource.data = validPassengers;
       },
-      error: () => {
-        // Handle error
-      }
+      error: (err) => console.error('Erreur lors du chargement des passagers :', err)
     });
   }
 

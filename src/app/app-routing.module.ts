@@ -14,12 +14,14 @@ import { AirportEditComponent } from './components/airport-edit/airport-edit.com
 import { AlertFormComponent } from './components/alert-form/alert-form.component';
 import { ReservationFormComponent } from './components/reservation-form/reservation-form.component';
 import { FlightDetailComponent } from './components/flight-detail/flight-detail.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 
 const routes: Routes = [
   // Auth
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'register', component: RegisterComponent },
 
   // Home

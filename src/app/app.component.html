@@ -1,20 +1,16 @@
 <mat-toolbar class="blue-toolbar">
   <span>FlightGuard</span>
   <span class="spacer"></span>
-  <button mat-button routerLink="/home">Home</button>
+  <button *ngIf="isLoggedIn" mat-button routerLink="/home">Home</button>
 
-  <!-- Login/Register visibles uniquement si non connecté -->
-  <button *ngIf="!isLoggedIn" mat-button routerLink="/login">Login</button>
-  <button *ngIf="!isLoggedIn" mat-button routerLink="/register">Register</button>
+  <!-- Login visible uniquement sur la page login et si non connecté -->
+  <button *ngIf="!isLoggedIn && isLoginPage" mat-button routerLink="/login">Login</button>
+
+  <!-- Register visible uniquement sur la page register et si non connecté -->
+  <button *ngIf="!isLoggedIn && isRegisterPage" mat-button routerLink="/register">Register</button>
 
   <!-- Logout visible uniquement si connecté -->
   <button *ngIf="isLoggedIn" mat-button (click)="logout()">Logout</button>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
-
-
-
-
-
-

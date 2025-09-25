@@ -1,3 +1,5 @@
+import { Alert } from "./alert";
+
 export interface Passenger {
     id: number;
     firstName: string;
@@ -6,5 +8,8 @@ export interface Passenger {
     phone: string;
     passportNumber: string;
     dob: string;
+    enabled: boolean;
+    alerts: Alert[];
+    flightNumbers?:string[];
   }
   

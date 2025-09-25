@@ -4,4 +4,5 @@ export interface Reservation {
   seatNumber: string;
   price: number;
   passengerId: number;
+  flightNumber: string;
 }

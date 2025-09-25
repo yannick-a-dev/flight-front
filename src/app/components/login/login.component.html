@@ -28,10 +28,18 @@
     </mat-form-field>
 
     <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid" class="submit-btn">
-      {{ isOtpStep ? 'Verify OTP' : 'Login' }}
+      {{ isOtpStep ? 'Verify OTP' : 'Se Connecter' }}
     </button>
 
   </form>
-  
   <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+  <div class="extra-links">
+    <button mat-button color="primary" routerLink="/forgot-password">
+      Mot de passe oublié ?
+    </button>
+    <button mat-button color="accent" routerLink="/register">
+      Créer un nouveau compte
+    </button>
+  </div>
 </div>
